@@ -46,8 +46,8 @@ export default function Contact() {
 
   const handleWhatsAppChat = () => {
     // Open a friendly direct whatsapp chat
-    const message = encodeURIComponent("Bonjour l'équipe APEX ! Je souhaite rejoindre le club. Pouvez-vous me donner plus de détails sur les abonnements ?");
-    window.open(`https://wa.me/33612345678?text=${message}`, '_blank', 'noopener,noreferrer');
+    const message = encodeURIComponent("Bonjour l'équipe AFRIKA FIT ! Je souhaite rejoindre le club. Pouvez-vous me donner plus de détails sur les abonnements ?");
+    window.open(`https://wa.me/22390353941?text=${message}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -80,7 +80,7 @@ export default function Contact() {
             {/* Info Cards */}
             <div className="space-y-6">
               <h3 className="font-display font-bold text-xl text-white uppercase tracking-wider">
-                Siège Social APEX
+                AFRIKA FIT Salle de Gym Fitness
               </h3>
               
               <div className="space-y-4">
@@ -92,7 +92,7 @@ export default function Contact() {
                   <div>
                     <span className="block text-[10px] font-mono uppercase text-gray-500 tracking-wider">Adresse Physique</span>
                     <span className="block text-sm text-gray-200 font-light mt-0.5">
-                      921 Boulevard de l'Apex, Performance City, PC 50293
+                      Hamdallaye ACI 2000, Bamako, Mali
                     </span>
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default function Contact() {
                   <div>
                     <span className="block text-[10px] font-mono uppercase text-gray-500 tracking-wider">Ligne Directe</span>
                     <span className="block text-sm text-gray-200 font-light mt-0.5">
-                      +33 1 45 67 89 10
+                      +223 90 35 39 41
                     </span>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export default function Contact() {
                   <div>
                     <span className="block text-[10px] font-mono uppercase text-gray-500 tracking-wider">Inscriptions & Renseignements</span>
                     <span className="block text-sm text-gray-200 font-light mt-0.5">
-                      contact@apexfitness.com
+                      afrikafit22@gmail.com
                     </span>
                   </div>
                 </div>
@@ -140,8 +140,8 @@ export default function Contact() {
                   <div className="h-10 w-10 rounded-full bg-brand-red text-white flex items-center justify-center shadow-lg shadow-brand-red/40 animate-bounce">
                     <MapPin className="w-5 h-5" />
                   </div>
-                  <span className="block font-display font-bold text-xs text-white mt-2 tracking-widest uppercase">EMPLACEMENT APEX</span>
-                  <span className="block text-[9px] font-mono text-gray-500 mt-1">LAT : 48.8566 • LON : 2.3522</span>
+                  <span className="block font-display font-bold text-xs text-white mt-2 tracking-widest uppercase">EMPLACEMENT AFRIKA FIT</span>
+                  <span className="block text-[9px] font-mono text-gray-500 mt-1">LAT : 12.6392 • LON : -8.0029</span>
                 </div>
               </div>
 
@@ -149,7 +149,7 @@ export default function Contact() {
               <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl glass-card border border-white/10 flex items-center justify-between z-20">
                 <span className="text-[10px] font-mono text-gray-400">Ouvrir l'itinéraire GPS</span>
                 <a
-                  href="https://maps.google.com/?q=Paris,+France"
+                  href="https://maps.google.com/?q=Hamdallaye+ACI+2000,+Bamako,+Mali"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-1.5 rounded-lg bg-brand-red text-white hover:bg-brand-orange transition-colors flex items-center justify-center"

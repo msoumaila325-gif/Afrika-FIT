@@ -41,14 +41,14 @@ export default function About() {
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
           <span className="font-mono text-xs text-brand-orange tracking-[0.25em] uppercase font-bold block">
-            À PROPOS DU SANCTUAIRE APEX
+            À PROPOS DU SANCTUAIRE AFRIKA FIT
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-white">
             REDÉFINIR LES LIMITES PHYSIQUES
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-brand-red to-brand-orange mx-auto rounded-full"></div>
           <p className="font-sans text-gray-400 font-light text-sm sm:text-base leading-relaxed">
-            Fondé en 2011, le centre de fitness Apex a commencé comme une alternative rebelle aux salles commerciales traditionnelles. Aujourd'hui, nous sommes un sanctuaire mondial d'élite proposant un développement physique personnalisé, de la science nutritionnelle et des écosystèmes de récupération haut de gamme.
+            Fondé en 2018, le centre de fitness AFRIKA FIT est né de la volonté d'offrir une expérience sportive d'élite combinant haute intensité et équipements haut de gamme. Aujourd'hui, nous sommes un sanctuaire de référence proposant un développement physique personnalisé, de la science nutritionnelle et des écosystèmes de récupération performants.
           </p>
         </div>
 
@@ -121,7 +121,7 @@ export default function About() {
             {/* Why Choose Us Bullet Blocks */}
             <div className="space-y-4 pt-4 border-t border-white/5">
               <h3 className="font-display font-semibold text-lg text-white uppercase tracking-wider">
-                POURQUOI CHOISIR LA MÉTRIQUE APEX ?
+                POURQUOI CHOISIR LA MÉTRIQUE AFRIKA FIT ?
               </h3>
               <p className="text-sm text-gray-400 font-light">
                 Nous pensons que le fitness n'est pas un simple passe-temps, mais un véritable investissement de vie. Notre méthode allie l'excellence de l'accompagnement, la performance mécanique et des protocoles de restauration physique raffinés.

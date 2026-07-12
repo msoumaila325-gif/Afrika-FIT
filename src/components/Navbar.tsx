@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Flame, ArrowRight, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import Logo from './Logo';
 
 interface NavbarProps {
   onJoinClick: () => void;
@@ -101,18 +102,7 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
             className="flex items-center gap-2 group cursor-pointer"
             id="nav-logo"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-brand-red text-white shadow-lg shadow-brand-red/30 transition-transform duration-300 group-hover:scale-110">
-              <Flame className="w-6 h-6 animate-pulse-slow text-white" />
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-brand-red to-brand-orange rounded-xl blur-sm opacity-50 -z-10 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-xl tracking-wider text-white">
-                APEX
-              </span>
-              <span className="text-[9px] font-mono tracking-[0.25em] text-brand-orange uppercase leading-none font-bold">
-                Luxury Fitness
-              </span>
-            </div>
+            <Logo className="h-10" />
           </a>
 
           {/* Desktop Nav Links */}

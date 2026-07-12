@@ -43,8 +43,8 @@ export default function App() {
   };
 
   const handleWhatsAppClick = () => {
-    const message = encodeURIComponent("Bonjour ! Je souhaite obtenir des informations sur l'inscription au club APEX.");
-    window.open(`https://wa.me/33612345678?text=${message}`, '_blank', 'noopener,noreferrer');
+    const message = encodeURIComponent("Bonjour ! Je souhaite obtenir des informations sur l'inscription à la salle de gym AFRIKA FIT.");
+    window.open(`https://wa.me/22390353941?text=${message}`, '_blank', 'noopener,noreferrer');
   };
 
   return (

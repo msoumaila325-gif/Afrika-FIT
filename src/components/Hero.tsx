@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Play, ArrowRight, ShieldCheck, Flame, Trophy } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Flame, Trophy, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface HeroProps {
@@ -19,18 +19,18 @@ export default function Hero({ onJoinClick, onExploreClick }: HeroProps) {
       className="relative min-h-screen flex items-center justify-center bg-luxury-gradient pt-24 overflow-hidden"
     >
       {/* Immersive Dark Gym Background with Parallax Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 select-none pointer-events-none">
         <img
-          src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=2000"
-          alt="Atmosphère de salle de sport haut de gamme"
-          className="w-full h-full object-cover object-center opacity-30 mix-blend-luminosity scale-105"
+          src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&q=80&w=1600"
+          alt="Athlète musculation"
+          className="absolute right-0 top-0 h-full w-full lg:w-[60%] object-cover object-center sm:object-right opacity-75 lg:opacity-95 scale-105 transition-all duration-700"
           referrerPolicy="no-referrer"
         />
-        {/* Cinematic dark gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark via-transparent to-brand-dark"></div>
+        {/* Cinematic dark gradients to blend image into background smoothly without covering the athlete */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/70 via-35% lg:via-[45%] to-transparent z-10 hidden lg:block"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent z-10 lg:hidden"></div>
         
-        {/* Animated ambient red glow blobs for high contrast luxury */}
+        {/* Animated ambient glow blobs */}
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-red/10 rounded-full blur-[120px] animate-pulse-slow"></div>
         <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-brand-orange/10 rounded-full blur-[100px] animate-pulse-slow"></div>
       </div>
@@ -53,52 +53,45 @@ export default function Hero({ onJoinClick, onExploreClick }: HeroProps) {
             </motion.div>
 
             {/* Giant Luxury Typography */}
-            <div className="space-y-4">
+            <div className="space-y-6">
               <motion.h1
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
-                className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1]"
+                className="font-display text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white leading-[0.95] uppercase"
               >
-                FORGEZ VOTRE <br className="hidden sm:inline" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-brand-orange to-red-500">
-                  MÉTRIQUE ULTIME
-                </span>
+                FORGEZ VOTRE <br />
+                MÉTRIQUE ULTIME
               </motion.h1>
               
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="font-sans text-gray-400 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed"
+                className="font-sans text-gray-400 text-sm sm:text-base lg:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed"
               >
-                Entrez dans un écosystème d'entraînement de classe mondiale conçu pour la performance absolue. Technologie de pointe, coachs d'élite internationaux et espaces de récupération premium.
+                Une sélection d'entraînements d'élite, de suivis biométriques de pointe et de programmes de transformation athlétique conçus pour forger votre physique et libérer votre potentiel.
               </motion.p>
             </div>
 
-            {/* Two Core Luxury CTA Buttons */}
+            {/* Main Red Solid Action Button like "Join Club Now!" */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2"
             >
-              {/* Join Now */}
               <button
                 onClick={onJoinClick}
-                className="relative overflow-hidden group px-8 py-4 rounded-xl bg-gradient-to-r from-brand-red to-brand-orange text-white font-display font-bold uppercase tracking-wider text-sm transition-all duration-300 shadow-xl shadow-brand-red/20 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+                className="relative overflow-hidden group px-10 py-4.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-display font-black uppercase tracking-widest text-xs sm:text-sm transition-all duration-300 shadow-xl shadow-red-600/20 hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
                 id="hero-join-now"
               >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  REJOINDRE LE CLUB APEX <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-orange to-brand-red opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                REJOINDRE LE CLUB !
               </button>
 
-              {/* Explore Our Gym */}
               <button
                 onClick={onExploreClick}
-                className="group px-8 py-4 rounded-xl glass-card text-white hover:text-black font-display font-semibold tracking-wider text-sm hover:bg-white transition-all duration-300 border border-white/10 hover:border-white shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+                className="group px-8 py-4.5 rounded-lg glass-card text-white hover:text-black font-display font-semibold tracking-wider text-xs sm:text-sm hover:bg-white transition-all duration-300 border border-white/10 hover:border-white shadow-lg active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
                 id="hero-explore-gym"
               >
                 <span>EXPLORER LE GYM</span>
@@ -110,7 +103,7 @@ export default function Hero({ onJoinClick, onExploreClick }: HeroProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
-              className="grid grid-cols-3 gap-4 pt-6 border-t border-white/5 max-w-lg mx-auto lg:mx-0"
+              className="grid grid-cols-3 gap-4 pt-8 border-t border-white/5 max-w-lg mx-auto lg:mx-0"
             >
               <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono text-gray-500 uppercase tracking-wider">
                 <ShieldCheck className="w-4 h-4 text-brand-red shrink-0" />
@@ -128,34 +121,44 @@ export default function Hero({ onJoinClick, onExploreClick }: HeroProps) {
 
           </div>
 
-          {/* Interactive Gym Badge / Creative Visual Ornament (Right side of Hero) */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          {/* Floating Metric Cards (Right side) - Matching reference screenshot */}
+          <div className="lg:col-span-5 relative h-[300px] sm:h-[400px] w-full flex flex-col justify-between p-4 sm:p-8">
+            
+            {/* Top Right Widget: Heart Rate */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotate: 3 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="relative w-72 h-72 sm:w-96 sm:h-96 rounded-3xl overflow-hidden shadow-2xl border border-white/10 group"
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="bg-brand-card/90 backdrop-blur-md border border-white/10 px-5 py-3.5 rounded-2xl flex items-center gap-4 shadow-2xl self-end md:mr-10"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-brand-red/40 via-transparent to-brand-orange/40 z-10 mix-blend-overlay"></div>
-              <img
-                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800"
-                alt="Altères haut de gamme"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                referrerPolicy="no-referrer"
-              />
-              
-              {/* Float Glass Overlay Card */}
-              <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl glass-card border border-white/10 z-20 flex items-center justify-between">
-                <div>
-                  <span className="block text-[9px] font-mono tracking-widest text-brand-orange uppercase">En direct</span>
-                  <span className="block font-display font-bold text-lg text-white">APEX CENTRAL</span>
-                  <span className="block text-xs text-gray-400">92 athlètes s'entraînent actuellement</span>
-                </div>
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-red/20 text-brand-red animate-pulse">
-                  <span className="block w-3 h-3 rounded-full bg-brand-red"></span>
-                </div>
+              <div className="h-10 w-10 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center animate-pulse">
+                <Heart className="w-5 h-5 fill-red-600 text-red-600" />
+              </div>
+              <div className="text-left">
+                <span className="block text-[9px] font-mono tracking-widest text-gray-500 uppercase">FÉQUENCE</span>
+                <span className="block font-display font-black text-lg text-white">100 bpm</span>
               </div>
             </motion.div>
+
+            {/* Bottom Right Widget: Soundwave/Intensity indicator */}
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="bg-brand-card/90 backdrop-blur-md border border-white/10 px-5 py-3.5 rounded-2xl flex items-center gap-4 shadow-2xl self-start md:ml-6 mt-auto"
+            >
+              <div className="flex items-end gap-1 h-8 w-10 shrink-0">
+                <span className="w-1.5 bg-brand-orange rounded-full animate-bounce" style={{ height: '65%', animationDuration: '0.9s', animationDelay: '0.1s' }}></span>
+                <span className="w-1.5 bg-brand-red rounded-full animate-bounce" style={{ height: '100%', animationDuration: '0.7s', animationDelay: '0.3s' }}></span>
+                <span className="w-1.5 bg-brand-orange rounded-full animate-bounce" style={{ height: '40%', animationDuration: '1.1s', animationDelay: '0.5s' }}></span>
+                <span className="w-1.5 bg-brand-red rounded-full animate-bounce" style={{ height: '80%', animationDuration: '0.8s', animationDelay: '0.2s' }}></span>
+              </div>
+              <div className="text-left">
+                <span className="block text-[9px] font-mono tracking-widest text-gray-500 uppercase">INTENSITÉ</span>
+                <span className="block font-display font-black text-lg text-brand-orange uppercase">Niveau Élite</span>
+              </div>
+            </motion.div>
+
           </div>
 
         </div>

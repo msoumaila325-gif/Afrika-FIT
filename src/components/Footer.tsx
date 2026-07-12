@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { Flame, Instagram, Twitter, Linkedin, Youtube, Facebook, Mail, CheckCircle2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import Logo from './Logo';
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -66,17 +67,7 @@ export default function Footer() {
               className="inline-flex items-center gap-2 group"
               id="footer-logo"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-brand-red text-white shadow-lg">
-                <Flame className="w-5 h-5 animate-pulse-slow text-white" />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="font-display font-bold text-xl tracking-wider text-white">
-                  APEX
-                </span>
-                <span className="text-[9px] font-mono tracking-[0.25em] text-brand-orange uppercase leading-none font-bold">
-                  Luxury Fitness
-                </span>
-              </div>
+              <Logo className="h-10" />
             </a>
 
             <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
@@ -202,7 +193,7 @@ export default function Footer() {
         {/* Lower row: copyright & details */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
           <span className="text-[10px] font-mono uppercase tracking-widest text-gray-600">
-            © {new Date().getFullYear()} Club de Fitness APEX • Temple Athlétique de Luxe. Tous droits réservés.
+            © {new Date().getFullYear()} AFRIKA FIT Salle de Gym Fitness • Tous droits réservés.
           </span>
           <div className="flex gap-6 text-[10px] font-mono uppercase tracking-widest text-gray-600">
             <a href="#about" className="hover:text-brand-orange transition-colors">Politique de Confidentialité</a>

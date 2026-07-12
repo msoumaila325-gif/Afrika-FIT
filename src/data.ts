@@ -155,7 +155,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: 'plan-daily',
     name: 'Pass Journalier',
-    price: '25',
+    price: '10000',
     period: 'Session Unique',
     description: 'Parfait pour les voyageurs et les visiteurs d\'un jour qui souhaitent vivre un entraînement d\'élite.',
     features: [
@@ -170,7 +170,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: 'plan-monthly',
     name: 'Abonnement Mensuel',
-    price: '89',
+    price: '45000',
     period: 'par mois',
     description: 'Conçu pour les résidents sérieux déterminés à progresser régulièrement.',
     features: [
@@ -185,7 +185,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: 'plan-quarterly',
     name: 'Élite Trimestriel',
-    price: '239',
+    price: '120000',
     period: 'par trimestre',
     description: 'Notre plan le plus populaire pour une transformation durable et un suivi régulier des progrès.',
     features: [
@@ -201,7 +201,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     id: 'plan-annual',
     name: 'Prestige Annuel de Luxe',
-    price: '799',
+    price: '400000',
     period: 'par an',
     description: 'Pour une véritable transformation de style de vie. La valeur à long terme absolue avec avantages VIP.',
     features: [
@@ -209,7 +209,7 @@ export const pricingPlans: PricingPlan[] = [
       '12 heures de coaching personnel privé en tête-à-tête',
       'Plans nutritionnels sur mesure basés sur les macronutriments',
       'Accès illimité à l\'espace de récupération de luxe',
-      'Sweat à capuche exclusif Apex offert',
+      'Sweat à capuche exclusif AFRIKA FIT offert',
       'Option de gel d\'abonnement annuel (jusqu\'à 30 jours)'
     ],
     isRecommended: false,
@@ -275,7 +275,7 @@ export const testimonialsData: TestimonialItem[] = [
     name: 'Sarah Jenkins',
     role: 'Athlète de Compétition',
     rating: 5,
-    comment: 'APEX n\'est pas seulement une salle de sport ; c\'est un temple athlétique de luxe. Le réglage des machines est parfait, les coachs sont d\'une rigueur scientifique remarquable et l\'environnement vous incite à dépasser vos limites. Rejoindre le programme Élite Trimestriel a complètement sculpté mon corps.',
+    comment: 'AFRIKA FIT n\'est pas seulement une salle de sport ; c\'est un temple athlétique de luxe. Le réglage des machines est parfait, les coachs sont d\'une rigueur scientifique remarquable et l\'environnement vous incite à dépasser vos limites. Rejoindre le programme Élite Trimestriel a complètement sculpté mon corps.',
     imageUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300'
   },
   {
@@ -318,7 +318,7 @@ export const faqData: FAQItem[] = [
   {
     id: 'faq-3',
     question: 'Comment réserver une séance en tête-à-tête avec un coach ?',
-    answer: 'Une fois inscrit chez APEX, vous aurez accès à notre interface de planification en ligne pour les membres. Vous pouvez également réserver votre premier bilan directement auprès d\'un coach à l\'accueil ou remplir le formulaire ci-dessous.'
+    answer: 'Une fois inscrit chez AFRIKA FIT, vous aurez accès à notre interface de planification en ligne pour les membres. Vous pouvez également réserver votre premier bilan directement auprès d\'un coach à l\'accueil ou remplir le formulaire ci-dessous.'
   },
   {
     id: 'faq-4',

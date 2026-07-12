@@ -13,16 +13,23 @@ export default function Pricing() {
 
   // Simple pricing helper that handles dynamic calculations for the cycle
   const getDisplayPrice = (planId: string, basePrice: string) => {
-    const rawNumber = parseInt(basePrice.replace('$', ''));
-    if (planId === 'plan-daily') return { price: `${rawNumber} €`, note: 'par séance' };
+    const rawNumber = parseInt(basePrice);
+    
+    const formatFCFA = (num: number) => {
+      return num.toLocaleString('fr-FR') + ' F CFA';
+    };
+
+    if (planId === 'plan-daily') return { price: formatFCFA(rawNumber), note: 'par séance' };
     
     if (billingCycle === 'annual') {
       // Apply a luxury 20% discount for annual billing
       const annualMonthlyRate = Math.floor((rawNumber * 12 * 0.8) / 12);
-      return { price: `${annualMonthlyRate} €`, note: 'par mois, facturé à l\'année' };
+      // Round to the nearest 100 for a clean display
+      const roundedRate = Math.round(annualMonthlyRate / 100) * 100;
+      return { price: formatFCFA(roundedRate), note: 'par mois, facturé à l\'année' };
     }
     
-    return { price: `${rawNumber} €`, note: planId === 'plan-annual' ? 'facturé à l\'année' : 'par mois' };
+    return { price: formatFCFA(rawNumber), note: planId === 'plan-annual' ? 'facturé à l\'année' : 'par mois' };
   };
 
   return (

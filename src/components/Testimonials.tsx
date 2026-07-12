@@ -69,7 +69,7 @@ export default function Testimonials() {
           </h2>
           <div className="h-1 w-20 bg-gradient-to-r from-brand-red to-brand-orange mx-auto rounded-full"></div>
           <p className="font-sans text-gray-400 font-light text-sm sm:text-base">
-            Découvrez les retours de nos membres actifs, qu'ils soient compétiteurs de force ou amateurs de bien-être, qui ont transformé leur physique au club APEX.
+            Découvrez les retours de nos membres actifs, qu'ils soient compétiteurs de force ou amateurs de bien-être, qui ont transformé leur physique chez AFRIKA FIT.
           </p>
         </div>
 
