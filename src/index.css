@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Premium luxury palette: ultra dark slate backgrounds with energetic red/orange neon accents */
+  --color-brand-red: #ea3838;
+  --color-brand-orange: #ff7300;
+  --color-brand-dark: #050505;
+  --color-brand-card: #0d0d0d;
+  --color-brand-border: #1a1a1a;
+  
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@utility bg-luxury-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(234, 56, 56, 0.08) 0%, rgba(255, 115, 0, 0.03) 50%, rgba(5, 5, 5, 0) 100%), #050505;
+}
+
+@utility glass-card {
+  background-color: rgba(13, 13, 13, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility glass-card-hover {
+  background-color: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  border-color: rgba(234, 56, 56, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #050505;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea3838;
+}
+
+::selection {
+  background: #ea3838;
+  color: #ffffff;
+}
+
+/* Accessibility High-Contrast Light Mode Overrides */
+html.light {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.light body {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Force light backgrounds for elements using raw dark classes */
+html.light .bg-\[\#050505\],
+html.light .bg-\[\#030303\],
+html.light .bg-brand-dark,
+html.light .bg-\[\#0d0d0d\],
+html.light .bg-black,
+html.light .bg-zinc-900,
+html.light .bg-zinc-950,
+html.light .bg-gray-950,
+html.light .bg-neutral-950,
+html.light .bg-neutral-900 {
+  background-color: #ffffff !important;
+}
+
+/* Soft white/slate cards and light panels */
+html.light .bg-\[\#0d0d0d\]\/70,
+html.light .bg-brand-dark\/90,
+html.light .bg-brand-dark\/95,
+html.light .bg-black\/80,
+html.light .bg-white\/5,
+html.light .bg-white\/10 {
+  background-color: #f8fafc !important;
+}
+
+/* High contrast text */
+html.light .text-white,
+html.light .text-gray-100,
+html.light .text-gray-200,
+html.light .text-gray-300,
+html.light .text-zinc-100,
+html.light .text-zinc-200 {
+  color: #0f172a !important;
+}
+
+html.light .text-gray-400,
+html.light .text-gray-500,
+html.light .text-zinc-400,
+html.light .text-zinc-500 {
+  color: #334155 !important; /* Higher contrast dark slate text for readability */
+}
+
+/* Borders in light mode */
+html.light .border-white\/5,
+html.light .border-white\/10,
+html.light .border-white\/20,
+html.light .border-zinc-800,
+html.light .border-brand-border,
+html.light .border-white\/30 {
+  border-color: #cbd5e1 !important;
+}
+
+/* Active buttons and highlights */
+html.light .text-brand-red {
+  color: #dc2626 !important;
+}
+html.light .bg-brand-red {
+  background-color: #dc2626 !important;
+}
+html.light .text-brand-orange {
+  color: #ea580c !important;
+}
+
+/* Ensure glass cards become readable light grey cards */
+html.light .glass-card {
+  background-color: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+  backdrop-filter: none;
+}
+html.light .glass-card-hover:hover {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Keep video player overlays or dark headers visible or elegant */
+html.light .promo-video-overlay {
+  background: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* High contrast inputs and textareas */
+html.light input,
+html.light textarea,
+html.light select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #94a3b8 !important;
+}
+
+/* Scrollbar overrides for light mode */
+html.light ::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+html.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+/* High contrast pricing plan accent text */
+html.light .bg-brand-orange\/10 {
+  background-color: #ffedd5 !important;
+  color: #ea580c !important;
+}

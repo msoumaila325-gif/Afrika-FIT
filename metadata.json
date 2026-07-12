@@ -1,0 +1,6 @@
+{
+  "name": "Apex Fitness & Gym Center",
+  "description": "A premium, responsive website for a luxury, energetic, and professional fitness center. Featuring interactive schedules, pricing calculators, gallery lightboxes, trainer profiles, and class bookings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
