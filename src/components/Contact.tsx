@@ -4,10 +4,16 @@
  */
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, MessageSquareCode, CheckCircle2, Navigation, Clock } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquareCode, CheckCircle2, Navigation } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import FAQ from './FAQ';
 
-export default function Contact() {
+interface ContactProps {
+  isStandalone?: boolean;
+  onBackToHome?: () => void;
+}
+
+export default function Contact({ isStandalone = false, onBackToHome }: ContactProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -57,6 +63,31 @@ export default function Contact() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
+        {/* Standalone Breadcrumbs & Back Nav */}
+        {isStandalone && (
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-12 pb-6 border-b border-white/5">
+            <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-gray-500">
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onBackToHome) onBackToHome();
+                }} 
+                className="hover:text-brand-red transition-colors cursor-pointer bg-transparent border-none p-0 font-bold"
+              >
+                ACCUEIL
+              </button>
+              <span className="text-gray-700">/</span>
+              <span className="text-white font-bold">PAGE CONTACT</span>
+            </div>
+            <button
+              onClick={onBackToHome}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:border-brand-red/40 hover:bg-brand-red/5 transition-all cursor-pointer"
+            >
+              ← Retour à l'accueil
+            </button>
+          </div>
+        )}
+
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="font-mono text-xs text-brand-orange tracking-[0.25em] uppercase font-bold block">
@@ -241,10 +272,10 @@ export default function Contact() {
                       onChange={handleChange}
                       className="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all appearance-none cursor-pointer"
                     >
-                      <option value="plan-daily">Pass Journalier (25 €)</option>
-                      <option value="plan-monthly">Abonnement Mensuel (89 €)</option>
-                      <option value="plan-quarterly">Élite Trimestriel (239 €) - RECOMMANDÉ</option>
-                      <option value="plan-annual">Prestige Annuel de Luxe (799 €)</option>
+                      <option value="plan-daily">Pass Journalier (10 000 F CFA)</option>
+                      <option value="plan-monthly">Abonnement Mensuel (45 000 F CFA)</option>
+                      <option value="plan-quarterly">Élite Trimestriel (120 000 F CFA) - RECOMMANDÉ</option>
+                      <option value="plan-annual">Prestige Annuel de Luxe (400 000 F CFA)</option>
                       <option value="corporate">Partenariat Entreprise / Corporate</option>
                     </select>
                   </div>
@@ -303,6 +334,13 @@ export default function Contact() {
           </div>
 
         </div>
+
+        {/* FAQ Section inside Standalone Contact page */}
+        {isStandalone && (
+          <div className="mt-24 pt-16 border-t border-white/5">
+            <FAQ isEmbedded={true} />
+          </div>
+        )}
 
       </div>
     </section>

@@ -7,8 +7,15 @@ import React from 'react';
 import { Target, Eye, Trophy, Sparkles, Zap, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
 import { statsData } from '../data';
+import Trainers from './Trainers';
+import Timetable from './Timetable';
 
-export default function About() {
+interface AboutProps {
+  isStandalone?: boolean;
+  onBackToHome?: () => void;
+}
+
+export default function About({ isStandalone = false, onBackToHome }: AboutProps) {
   const coreValues = [
     {
       icon: Trophy,
@@ -31,6 +38,7 @@ export default function About() {
   ];
 
   return (
+    <>
     <section id="about" className="py-24 bg-brand-dark relative overflow-hidden">
       {/* Background aesthetics */}
       <div className="absolute top-1/2 right-0 w-96 h-96 bg-brand-red/5 rounded-full blur-[150px] -z-10"></div>
@@ -38,8 +46,37 @@ export default function About() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        {/* Standalone Breadcrumbs & Back Nav */}
+        {isStandalone && (
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-12 pb-6 border-b border-white/5">
+            <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-gray-500">
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onBackToHome) onBackToHome();
+                }} 
+                className="hover:text-brand-red transition-colors cursor-pointer bg-transparent border-none p-0 font-bold"
+              >
+                ACCUEIL
+              </button>
+              <span className="text-gray-700">/</span>
+              <span className="text-white font-bold">À PROPOS</span>
+            </div>
+            <button
+              onClick={onBackToHome}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:border-brand-red/40 hover:bg-brand-red/5 transition-all cursor-pointer"
+            >
+              ← Retour à l'accueil
+            </button>
+          </div>
+        )}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20 space-y-4"
+        >
           <span className="font-mono text-xs text-brand-orange tracking-[0.25em] uppercase font-bold block">
             À PROPOS DU SANCTUAIRE AFRIKA FIT
           </span>
@@ -50,13 +87,19 @@ export default function About() {
           <p className="font-sans text-gray-400 font-light text-sm sm:text-base leading-relaxed">
             Fondé en 2018, le centre de fitness AFRIKA FIT est né de la volonté d'offrir une expérience sportive d'élite combinant haute intensité et équipements haut de gamme. Aujourd'hui, nous sommes un sanctuaire de référence proposant un développement physique personnalisé, de la science nutritionnelle et des écosystèmes de récupération performants.
           </p>
-        </div>
+        </motion.div>
 
         {/* Presentational Grid with Image & Info Cards */}
         <div className="grid lg:grid-cols-12 gap-12 lg:items-center mb-24">
           
           {/* Left Column - Large Image Collage */}
-          <div className="lg:col-span-6 relative">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-6 relative"
+          >
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=1200"
@@ -84,10 +127,16 @@ export default function About() {
                 Nous guidons vos transformations physiques grâce à des évaluations athlétiques précises et un suivi régulier des performances.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column - Mission, Vision, and Highlights */}
-          <div className="lg:col-span-6 space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-6 space-y-8"
+          >
             
             {/* Split Mission & Vision cards */}
             <div className="grid sm:grid-cols-2 gap-6">
@@ -145,7 +194,7 @@ export default function About() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
         </div>
 
@@ -174,5 +223,16 @@ export default function About() {
 
       </div>
     </section>
+
+    {/* Section Équipe intégrée dans À Propos */}
+    <Trainers />
+
+    {/* Section Horaire intégrée dans À Propos si Standalone */}
+    {isStandalone && (
+      <div className="border-t border-white/5 bg-[#050505]">
+        <Timetable isEmbedded={true} />
+      </div>
+    )}
+    </>
   );
 }

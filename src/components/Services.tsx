@@ -8,6 +8,7 @@ import { Dumbbell, Sparkles, Zap, Flame, Heart, Music, TrendingUp, Award, CheckC
 import { motion, AnimatePresence } from 'motion/react';
 import { servicesData } from '../data';
 import { ServiceItem } from '../types';
+import Pricing from './Pricing';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Dumbbell,
@@ -20,7 +21,12 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Award,
 };
 
-export default function Services() {
+interface ServicesProps {
+  isStandalone?: boolean;
+  onBackToHome?: () => void;
+}
+
+export default function Services({ isStandalone = false, onBackToHome }: ServicesProps) {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
 
   return (
@@ -31,8 +37,39 @@ export default function Services() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
+        {/* Standalone Breadcrumbs & Back Nav */}
+        {isStandalone && (
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-12 pb-6 border-b border-white/5">
+            <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-gray-500">
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onBackToHome) onBackToHome();
+                }} 
+                className="hover:text-brand-red transition-colors cursor-pointer bg-transparent border-none p-0 font-bold"
+              >
+                ACCUEIL
+              </button>
+              <span className="text-gray-700">/</span>
+              <span className="text-white font-bold">NOS SERVICES & TARIFS</span>
+            </div>
+            <button
+              onClick={onBackToHome}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:border-brand-red/40 hover:bg-brand-red/5 transition-all cursor-pointer"
+            >
+              ← Retour à l'accueil
+            </button>
+          </div>
+        )}
+
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20 space-y-4"
+        >
           <span className="font-mono text-xs text-brand-orange tracking-[0.25em] uppercase font-bold block">
             NOS ENTRAÎNEMENTS D'ÉLITE
           </span>
@@ -43,7 +80,7 @@ export default function Services() {
           <p className="font-sans text-gray-400 font-light text-sm sm:text-base">
             Explorez nos disciplines d'entraînement de pointe. Chacune est conçue pour des objectifs athlétiques précis, avec des métriques de pointe et du matériel haut de gamme.
           </p>
-        </div>
+        </motion.div>
 
         {/* Dynamic Interactive Cards Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -150,7 +187,7 @@ export default function Services() {
                       {React.createElement(iconMap[selectedService.iconName] || Dumbbell, { className: 'w-6 h-6' })}
                     </div>
                     <div>
-                      <span className="block text-[10px] font-mono tracking-widest text-brand-orange uppercase leading-none font-semibold mb-1">Zone Apex</span>
+                      <span className="block text-[10px] font-mono tracking-widest text-brand-orange uppercase leading-none font-semibold mb-1">Zone AFRIKA FIT</span>
                       <h3 className="font-display font-bold text-2xl text-white leading-none">{selectedService.title}</h3>
                     </div>
                   </div>
@@ -212,6 +249,13 @@ export default function Services() {
             </div>
           )}
         </AnimatePresence>
+
+        {/* Pricing Section inside Standalone Services page */}
+        {isStandalone && (
+          <div className="mt-24 pt-16 border-t border-white/5">
+            <Pricing isEmbedded={true} />
+          </div>
+        )}
 
       </div>
     </section>

@@ -10,9 +10,11 @@ import Logo from './Logo';
 
 interface NavbarProps {
   onJoinClick: () => void;
+  currentView?: 'home' | 'contact' | 'gallery' | 'services' | 'about';
+  onViewChange?: (view: 'home' | 'contact' | 'gallery' | 'services' | 'about') => void;
 }
 
-export default function Navbar({ onJoinClick }: NavbarProps) {
+export default function Navbar({ onJoinClick, currentView = 'home', onViewChange }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -28,20 +30,48 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
     { name: 'À Propos', href: '#about', id: 'about' },
     { name: 'Services', href: '#services', id: 'services' },
     { name: 'Galerie', href: '#gallery', id: 'gallery' },
-    { name: 'Horaires', href: '#timetable', id: 'timetable' },
-    { name: 'Tarifs', href: '#pricing', id: 'pricing' },
-    { name: 'Équipe', href: '#trainers', id: 'trainers' },
-    { name: 'FAQ', href: '#faq', id: 'faq' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   useEffect(() => {
+    if (currentView === 'contact') {
+      setActiveSection('contact');
+      setScrolled(true);
+      return;
+    }
+    if (currentView === 'about') {
+      setActiveSection('about');
+      setScrolled(true);
+      return;
+    }
+    if (currentView === 'gallery') {
+      setActiveSection('gallery');
+      setScrolled(true);
+      return;
+    }
+    if (currentView === 'services') {
+      setScrolled(true);
+      const handleScroll = () => {
+        const scrollPosition = window.scrollY + 120;
+        const el = document.getElementById('pricing');
+        if (el && scrollPosition >= el.offsetTop) {
+          setActiveSection('pricing');
+        } else {
+          setActiveSection('services');
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+      handleScroll();
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
       // Simple active link detection
       const scrollPosition = window.scrollY + 120;
       for (const link of navLinks) {
+        if (link.id === 'contact' || link.id === 'gallery' || link.id === 'services' || link.id === 'pricing') continue;
         const el = document.getElementById(link.id);
         if (el) {
           const top = el.offsetTop;
@@ -54,8 +84,9 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [currentView]);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -74,13 +105,39 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+    
     const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth',
-      });
+    
+    if (targetId === 'contact') {
+      if (onViewChange) onViewChange('contact');
+    } else if (targetId === 'gallery') {
+      if (onViewChange) onViewChange('gallery');
+    } else if (targetId === 'services') {
+      if (onViewChange) onViewChange('services');
+    } else if (targetId === 'about') {
+      if (onViewChange) onViewChange('about');
+    } else if (targetId === 'pricing') {
+      if (onViewChange) onViewChange('services');
+      setTimeout(() => {
+        const element = document.getElementById('pricing');
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth',
+          });
+        }
+      }, 150);
+    } else {
+      if (onViewChange) onViewChange('home');
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth',
+          });
+        }
+      }, 150);
     }
   };
 
@@ -95,19 +152,21 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#hero"
-            onClick={(e) => handleLinkClick(e, '#hero')}
-            className="flex items-center gap-2 group cursor-pointer"
-            id="nav-logo"
-          >
-            <Logo className="h-10" />
-          </a>
+          {/* Logo (Left) */}
+          <div className="flex-1 flex justify-start">
+            <a
+              href="#hero"
+              onClick={(e) => handleLinkClick(e, '#hero')}
+              className="flex items-center gap-2 group cursor-pointer"
+              id="nav-logo"
+            >
+              <Logo className="h-10" />
+            </a>
+          </div>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-5">
+          {/* Desktop Nav Links (Centered) */}
+          <div className="hidden lg:flex items-center justify-center">
+            <div className="flex items-center gap-8">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -130,7 +189,10 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
                 </a>
               ))}
             </div>
+          </div>
 
+          {/* Desktop Actions (Right) */}
+          <div className="hidden lg:flex items-center justify-end flex-1 gap-6">
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
@@ -196,31 +258,31 @@ export default function Navbar({ onJoinClick }: NavbarProps) {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className="lg:hidden bg-brand-dark/95 backdrop-blur-xl border-b border-white/5 overflow-hidden"
           >
-            <div className="px-4 pt-4 pb-6 space-y-3">
+            <div className="px-4 pt-4 pb-6 space-y-3 text-center">
               {navLinks.map((link, idx) => (
                 <motion.a
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.03 }}
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`block py-2.5 px-4 rounded-lg font-sans text-sm uppercase tracking-widest transition-colors ${
+                  className={`block py-2.5 px-4 rounded-lg font-sans text-sm uppercase tracking-widest transition-colors text-center ${
                     activeSection === link.id
-                      ? 'bg-brand-red/10 text-brand-red font-semibold border-l-2 border-brand-red'
+                      ? 'bg-brand-red/10 text-brand-red font-semibold border-b border-brand-red'
                       : 'text-gray-400 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   {link.name}
                 </motion.a>
               ))}
-              <div className="pt-4 px-4">
+              <div className="pt-4 px-4 flex justify-center">
                 <button
                   onClick={() => {
                     setIsOpen(false);
                     onJoinClick();
                   }}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-r from-brand-red to-brand-orange text-white font-display font-semibold uppercase text-xs tracking-wider shadow-lg"
+                  className="w-full max-w-xs flex items-center justify-center gap-2 py-3 rounded-lg bg-gradient-to-r from-brand-red to-brand-orange text-white font-display font-semibold uppercase text-xs tracking-wider shadow-lg"
                   id="mobile-join-btn"
                 >
                   Rejoindre le club <ArrowRight className="w-4 h-4" />

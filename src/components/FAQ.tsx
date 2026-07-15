@@ -8,7 +8,11 @@ import { HelpCircle, ChevronDown, ChevronUp, Sparkles, MessageCircle } from 'luc
 import { motion, AnimatePresence } from 'motion/react';
 import { faqData } from '../data';
 
-export default function FAQ() {
+interface FAQProps {
+  isEmbedded?: boolean;
+}
+
+export default function FAQ({ isEmbedded = false }: FAQProps) {
   const [openId, setOpenId] = useState<string | null>('faq-1'); // Default open the first one
 
   const handleToggle = (id: string) => {
@@ -16,7 +20,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="faq" className={`${isEmbedded ? 'py-4 bg-transparent' : 'py-24 bg-brand-dark relative overflow-hidden'}`}>
       {/* Absolute decorative backings */}
       <div className="absolute top-1/2 right-10 w-96 h-96 bg-brand-orange/5 rounded-full blur-[140px] pointer-events-none"></div>
 

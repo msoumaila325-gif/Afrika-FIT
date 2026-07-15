@@ -19,7 +19,13 @@ export default function Trainers() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20 space-y-4"
+        >
           <span className="font-mono text-xs text-brand-orange tracking-[0.25em] uppercase font-bold block">
             MAÎTRES DE LA PERFORMANCE
           </span>
@@ -30,7 +36,7 @@ export default function Trainers() {
           <p className="font-sans text-gray-400 font-light text-sm sm:text-base">
             Entraînez-vous aux côtés de directeurs de performance certifiés à l'international, d'anciens champions d'haltérophilie et de spécialistes de la biomécanique déterminés à libérer votre potentiel athlétique.
           </p>
-        </div>
+        </motion.div>
 
         {/* Trainers Cards Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -207,7 +213,7 @@ export default function Trainers() {
                     {/* Action footer */}
                     <div className="flex items-center justify-between pt-6 border-t border-white/5">
                       <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
-                        APEX COACHING ACADEMY
+                        AFRIKA FIT COACHING ACADEMY
                       </span>
                       <button
                         onClick={() => setSelectedTrainer(null)}

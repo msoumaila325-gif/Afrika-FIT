@@ -3,26 +3,47 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Services from './components/Services';
 import Gallery from './components/Gallery';
 import PromoVideo from './components/PromoVideo';
-import Timetable from './components/Timetable';
 import Pricing from './components/Pricing';
-import Trainers from './components/Trainers';
 import Testimonials from './components/Testimonials';
+import Timetable from './components/Timetable';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
+import Trainers from './components/Trainers';
+import HomeAbout from './components/HomeAbout';
+import Accompagnement from './components/Accompagnement';
 import Footer from './components/Footer';
 import { MessageCircle } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
+  const [currentView, setCurrentView] = useState<'home' | 'contact' | 'gallery' | 'services' | 'about'>('home');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentView]);
+
   // Utility scrolling actions to pass down to navbar & hero components
   const handleScrollToJoin = () => {
+    if (currentView !== 'services') {
+      setCurrentView('services');
+      setTimeout(() => {
+        const pricingEl = document.getElementById('pricing');
+        if (pricingEl) {
+          window.scrollTo({
+            top: pricingEl.offsetTop - 80,
+            behavior: 'smooth',
+          });
+        }
+      }, 150);
+      return;
+    }
     const pricingEl = document.getElementById('pricing');
     if (pricingEl) {
       window.scrollTo({
@@ -33,13 +54,7 @@ export default function App() {
   };
 
   const handleScrollToExplore = () => {
-    const aboutEl = document.getElementById('about');
-    if (aboutEl) {
-      window.scrollTo({
-        top: aboutEl.offsetTop - 80,
-        behavior: 'smooth',
-      });
-    }
+    setCurrentView('about');
   };
 
   const handleWhatsAppClick = () => {
@@ -50,43 +65,103 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#050505] text-white overflow-hidden font-sans antialiased">
       {/* Floating Header */}
-      <Navbar onJoinClick={handleScrollToJoin} />
-
-      {/* Hero Section */}
-      <Hero
-        onJoinClick={handleScrollToJoin}
-        onExploreClick={handleScrollToExplore}
+      <Navbar 
+        onJoinClick={handleScrollToJoin} 
+        currentView={currentView}
+        onViewChange={(view) => setCurrentView(view)}
       />
 
-      {/* About Us section with mission, vision and counters */}
-      <About />
+      <AnimatePresence mode="wait">
+        {currentView === 'home' && (
+          <motion.div
+            key="home-page"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Hero Section */}
+            <Hero
+              onJoinClick={handleScrollToJoin}
+              onExploreClick={handleScrollToExplore}
+            />
 
-      {/* 8 beautiful custom-animated services cards */}
-      <Services />
+            {/* Alternately designed Sanctuary About section for the home page */}
+            <HomeAbout onLearnMore={() => setCurrentView('about')} />
 
-      {/* Masonry gallery with category sorting and Lightbox */}
-      <Gallery />
+            {/* Elegant promotional 4K video player section */}
+            <PromoVideo />
 
-      {/* Elegant promotional 4K video player section */}
-      <PromoVideo />
+            {/* Premium training companion programs section with call to action */}
+            <Accompagnement 
+              onJoinClick={handleScrollToJoin}
+              onWhatsAppClick={handleWhatsAppClick}
+            />
 
-      {/* Opening hours & interactive timetable scheduling booking slot */}
-      <Timetable />
+            {/* Opening hours & interactive timetable scheduling booking slot */}
+            <Timetable />
 
-      {/* Membership pricing cards with monthly/annual calculation toggle */}
-      <Pricing />
+            {/* Customer review carousel with star ratings and user portraits */}
+            <Testimonials />
+          </motion.div>
+        )}
 
-      {/* Certified trainer profiles with detail biodialogues & socials */}
-      <Trainers />
+        {currentView === 'about' && (
+          <motion.div
+            key="about-page"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="pt-20"
+          >
+            {/* Standalone About Page */}
+            <About isStandalone={true} onBackToHome={() => setCurrentView('home')} />
+          </motion.div>
+        )}
 
-      {/* Customer review carousel with star ratings and user portraits */}
-      <Testimonials />
+        {currentView === 'services' && (
+          <motion.div
+            key="services-page"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="pt-20"
+          >
+            {/* Standalone Services and Pricing Page */}
+            <Services isStandalone={true} onBackToHome={() => setCurrentView('home')} />
+          </motion.div>
+        )}
 
-      {/* FAQ modern accordion system */}
-      <FAQ />
+        {currentView === 'gallery' && (
+          <motion.div
+            key="gallery-page"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="pt-20"
+          >
+            {/* Standalone Gallery Page */}
+            <Gallery isStandalone={true} onBackToHome={() => setCurrentView('home')} />
+          </motion.div>
+        )}
 
-      {/* Contact Form with mock coordinates card, open map, and direct whatsapp */}
-      <Contact />
+        {currentView === 'contact' && (
+          <motion.div
+            key="contact-page"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="pt-20"
+          >
+            {/* Standalone Contact and FAQ Page */}
+            <Contact isStandalone={true} onBackToHome={() => setCurrentView('home')} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Brand copyright links and subscription newsletter form */}
       <Footer />

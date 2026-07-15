@@ -32,6 +32,14 @@
   border-color: rgba(234, 56, 56, 0.25);
 }
 
+@utility scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   background-color: #050505;

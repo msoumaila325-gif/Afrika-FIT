@@ -8,7 +8,11 @@ import { Calendar, Clock, Sparkles, CheckCircle2, ChevronRight, User } from 'luc
 import { motion, AnimatePresence } from 'motion/react';
 import { timetableData } from '../data';
 
-export default function Timetable() {
+interface TimetableProps {
+  isEmbedded?: boolean;
+}
+
+export default function Timetable({ isEmbedded = false }: TimetableProps) {
   const [activeDayIndex, setActiveDayIndex] = useState(0);
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [bookingSuccess, setBookingSuccess] = useState<string | null>(null);
@@ -32,14 +36,20 @@ export default function Timetable() {
   };
 
   return (
-    <section id="timetable" className="py-24 bg-brand-dark relative overflow-hidden">
+    <section id="timetable" className={`${isEmbedded ? 'py-4 bg-transparent' : 'py-24 bg-brand-dark relative overflow-hidden'}`}>
       {/* Background neon glows */}
       <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-red/5 rounded-full blur-[110px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16 space-y-4"
+        >
           <span className="font-mono text-xs text-brand-orange tracking-[0.25em] uppercase font-bold block">
             PLANNING DES SÉANCES
           </span>
@@ -50,58 +60,73 @@ export default function Timetable() {
           <p className="font-sans text-gray-400 font-light text-sm sm:text-base">
             Planifiez vos entraînements en toute simplicité. Cliquez sur un cours du planning interactif pour réserver instantanément votre session avec nos coachs d'élite.
           </p>
-        </div>
+        </motion.div>
 
         {/* Outer Grid: Left Opening Cards, Right Active Scheduler */}
         <div className="grid lg:grid-cols-12 gap-12">
           
           {/* Left Column: 3 Opening Hour Cards */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-5 flex flex-col space-y-6"
+          >
             <h3 className="font-display font-bold text-lg text-white uppercase tracking-wider mb-2 flex items-center gap-2">
               <Clock className="w-5 h-5 text-brand-red animate-pulse" />
               Heures d'Ouverture
             </h3>
 
-            {timetableData.map((dayData, idx) => (
-              <div
-                key={idx}
-                className={`p-6 rounded-2xl bg-brand-card border transition-all duration-300 relative overflow-hidden flex flex-col justify-between ${
-                  activeDayIndex === idx
-                    ? 'border-brand-red/40 shadow-lg shadow-brand-red/5'
-                    : 'border-white/5 opacity-80 hover:opacity-100 hover:border-white/10'
-                }`}
-                onClick={() => setActiveDayIndex(idx)}
-                style={{ cursor: 'pointer' }}
-                id={`timetable-day-card-${idx}`}
-              >
-                {activeDayIndex === idx && (
-                  <div className="absolute top-0 right-0 px-3 py-1 bg-gradient-to-r from-brand-red to-brand-orange rounded-bl-xl font-mono text-[9px] text-white tracking-widest font-bold uppercase">
-                    Sélectionné
+            <div className="flex lg:flex-col gap-4 lg:gap-6 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-none -mx-4 px-4 lg:mx-0 lg:px-0">
+              {timetableData.map((dayData, idx) => (
+                <motion.div
+                  whileHover={{ y: -2, borderColor: 'rgba(239, 68, 68, 0.25)' }}
+                  whileTap={{ scale: 0.98 }}
+                  key={idx}
+                  className={`snap-start shrink-0 w-[85%] sm:w-[48%] lg:w-full p-6 rounded-2xl bg-brand-card border transition-all duration-300 relative overflow-hidden flex flex-col justify-between cursor-pointer select-none ${
+                    activeDayIndex === idx
+                      ? 'border-brand-red/40 shadow-lg shadow-brand-red/5'
+                      : 'border-white/5 opacity-80 hover:opacity-100 hover:border-white/10'
+                  }`}
+                  onClick={() => setActiveDayIndex(idx)}
+                  id={`timetable-day-card-${idx}`}
+                >
+                  {activeDayIndex === idx && (
+                    <div className="absolute top-0 right-0 px-3 py-1 bg-gradient-to-r from-brand-red to-brand-orange rounded-bl-xl font-mono text-[9px] text-white tracking-widest font-bold uppercase">
+                      Sélectionné
+                    </div>
+                  )}
+
+                  <div className="space-y-2">
+                    <span className="block font-display font-semibold text-white text-lg">
+                      {dayData.day}
+                    </span>
+                    {/* Time in JetBrains Mono for athletic/technical precision */}
+                    <span className="block font-mono text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-red-400">
+                      {dayData.hours}
+                    </span>
                   </div>
-                )}
 
-                <div className="space-y-2">
-                  <span className="block font-display font-semibold text-white text-lg">
-                    {dayData.day}
-                  </span>
-                  {/* Time in JetBrains Mono for athletic/technical precision */}
-                  <span className="block font-mono text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-red-400">
-                    {dayData.hours}
-                  </span>
-                </div>
-
-                <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
-                  <p className="text-xs text-gray-500 font-light italic">
-                    {dayData.note || 'Tous les services et installations sont pleinement opérationnels.'}
-                  </p>
-                  <ChevronRight className="w-4 h-4 text-brand-red shrink-0" />
-                </div>
-              </div>
-            ))}
-          </div>
+                  <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between">
+                    <p className="text-xs text-gray-500 font-light italic">
+                      {dayData.note || 'Tous les services et installations sont pleinement opérationnels.'}
+                    </p>
+                    <ChevronRight className="w-4 h-4 text-brand-red shrink-0" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Right Column: Dynamic Scheduler listing active classes for selected day */}
-          <div className="lg:col-span-7">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-7"
+          >
             <div className="p-6 sm:p-8 rounded-3xl glass-card border border-white/10 flex flex-col h-full justify-between">
               
               {/* Active Day Header */}
@@ -168,7 +193,7 @@ export default function Timetable() {
               </p>
 
             </div>
-          </div>
+          </motion.div>
 
         </div>
 

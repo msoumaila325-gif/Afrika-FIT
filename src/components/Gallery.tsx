@@ -9,7 +9,12 @@ import { motion, AnimatePresence } from 'motion/react';
 import { galleryData } from '../data';
 import { GalleryItem } from '../types';
 
-export default function Gallery() {
+interface GalleryProps {
+  isStandalone?: boolean;
+  onBackToHome?: () => void;
+}
+
+export default function Gallery({ isStandalone = false, onBackToHome }: GalleryProps) {
   const [activeFilter, setActiveFilter] = useState<'all' | 'workout' | 'cardio' | 'crossfit' | 'facilities' | 'yoga'>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -46,6 +51,31 @@ export default function Gallery() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* Standalone Breadcrumbs & Back Nav */}
+        {isStandalone && (
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-12 pb-6 border-b border-white/5">
+            <div className="flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase text-gray-500">
+              <button 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onBackToHome) onBackToHome();
+                }} 
+                className="hover:text-brand-red transition-colors cursor-pointer bg-transparent border-none p-0 font-bold"
+              >
+                ACCUEIL
+              </button>
+              <span className="text-gray-700">/</span>
+              <span className="text-white font-bold">GALERIE</span>
+            </div>
+            <button
+              onClick={onBackToHome}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:border-brand-red/40 hover:bg-brand-red/5 transition-all cursor-pointer"
+            >
+              ← Retour à l'accueil
+            </button>
+          </div>
+        )}
+
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="font-mono text-xs text-brand-orange tracking-[0.25em] uppercase font-bold block">
