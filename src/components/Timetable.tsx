@@ -62,29 +62,59 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
           </p>
         </motion.div>
 
-        {/* Outer Grid: Left Opening Cards, Right Active Scheduler */}
-        <div className="grid lg:grid-cols-12 gap-12">
+        {/* Mobile/Tablet Day Selector & Opening Hours Header */}
+        <div className="lg:hidden mb-8 space-y-4">
+          <h3 className="font-display font-bold text-sm text-white uppercase tracking-wider flex items-center gap-2">
+            <Clock className="w-4 h-4 text-brand-red animate-pulse" />
+            Heures d'Ouverture & Séances
+          </h3>
           
-          {/* Left Column: 3 Opening Hour Cards */}
+          <div className="bg-brand-card/60 p-1 rounded-2xl border border-white/5 flex gap-1">
+            {timetableData.map((dayData, idx) => {
+              const displayName = dayData.day === 'Lundi - Vendredi' ? 'Lun - Ven' : dayData.day;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActiveDayIndex(idx)}
+                  className={`flex-1 py-3 px-1.5 rounded-xl text-center transition-all cursor-pointer font-display text-xs font-semibold ${
+                    activeDayIndex === idx
+                      ? 'bg-gradient-to-r from-brand-red to-brand-orange text-white shadow-lg'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  <span className="block text-xs sm:text-sm">{displayName}</span>
+                  <span className="block font-mono text-[9px] sm:text-xs text-white/70 font-medium mt-1">
+                    {dayData.hours}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Outer Grid: Left Opening Cards, Right Active Scheduler */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          
+          {/* Left Column: 3 Opening Hour Cards (Desktop Only) */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-5 flex flex-col space-y-6"
+            className="hidden lg:flex lg:col-span-5 flex-col space-y-6"
           >
             <h3 className="font-display font-bold text-lg text-white uppercase tracking-wider mb-2 flex items-center gap-2">
               <Clock className="w-5 h-5 text-brand-red animate-pulse" />
               Heures d'Ouverture
             </h3>
 
-            <div className="flex lg:flex-col gap-4 lg:gap-6 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-none -mx-4 px-4 lg:mx-0 lg:px-0">
+            <div className="flex flex-col gap-6">
               {timetableData.map((dayData, idx) => (
                 <motion.div
                   whileHover={{ y: -2, borderColor: 'rgba(239, 68, 68, 0.25)' }}
                   whileTap={{ scale: 0.98 }}
                   key={idx}
-                  className={`snap-start shrink-0 w-[85%] sm:w-[48%] lg:w-full p-6 rounded-2xl bg-brand-card border transition-all duration-300 relative overflow-hidden flex flex-col justify-between cursor-pointer select-none ${
+                  className={`p-6 rounded-2xl bg-brand-card border transition-all duration-300 relative overflow-hidden flex flex-col justify-between cursor-pointer select-none ${
                     activeDayIndex === idx
                       ? 'border-brand-red/40 shadow-lg shadow-brand-red/5'
                       : 'border-white/5 opacity-80 hover:opacity-100 hover:border-white/10'
@@ -125,9 +155,9 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-7"
+            className="lg:col-span-7 w-full"
           >
-            <div className="p-6 sm:p-8 rounded-3xl glass-card border border-white/10 flex flex-col h-full justify-between">
+            <div className="p-5 sm:p-8 rounded-3xl glass-card border border-white/10 flex flex-col h-full justify-between">
               
               {/* Active Day Header */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-white/5 mb-6">
@@ -136,8 +166,11 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
                   <h4 className="font-display font-bold text-2xl text-white mt-1">
                     Séances du {activeDay.day}
                   </h4>
+                  <p className="lg:hidden text-xs text-gray-400 font-light italic mt-1.5">
+                    {activeDay.note || 'Tous les services et installations sont pleinement opérationnels.'}
+                  </p>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-mono text-gray-400 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 self-start">
+                <div className="flex items-center gap-2 text-xs font-mono text-gray-400 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 self-start sm:self-auto">
                   <Calendar className="w-3.5 h-3.5 text-brand-red" />
                   <span>{activeDay.classes.length} cours planifiés</span>
                 </div>
@@ -155,21 +188,18 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
                       transition={{ delay: index * 0.04 }}
                       className="p-4 rounded-xl bg-brand-dark/50 border border-white/5 hover:border-brand-orange/20 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
                     >
-                      <div className="flex items-start gap-4">
-                        <div className="p-2.5 rounded-lg bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-center shrink-0 min-w-[80px]">
-                          {/* Time Stamp inside custom mono block */}
-                          <span className="block font-mono text-xs font-bold leading-none">
-                            {timePart.split(' ')[0]}
-                          </span>
-                          <span className="block font-mono text-[9px] uppercase tracking-wider mt-1 text-gray-400 leading-none">
-                            {timePart.split(' ')[1]}
+                      <div className="flex items-center gap-4">
+                        <div className="py-2.5 px-3.5 rounded-lg bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-center shrink-0 flex items-center gap-2 sm:gap-0 sm:flex-col sm:justify-center sm:min-w-[80px]">
+                          <Clock className="w-3.5 h-3.5 text-brand-orange sm:hidden" />
+                          <span className="font-mono text-xs sm:text-sm font-bold leading-none">
+                            {timePart}
                           </span>
                         </div>
                         <div>
-                          <h5 className="font-display font-bold text-white text-base group-hover:text-brand-orange transition-colors">
+                          <h5 className="font-display font-bold text-white text-sm sm:text-base group-hover:text-brand-orange transition-colors">
                             {namePart}
                           </h5>
-                          <p className="text-xs text-gray-400 font-light mt-0.5">
+                          <p className="text-[11px] sm:text-xs text-gray-400 font-light mt-0.5">
                             Niveau : Intermédiaire à Élite • Service de serviettes inclus
                           </p>
                         </div>
@@ -177,7 +207,7 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
 
                       <button
                         onClick={() => handleBookClass(`${timePart} - ${namePart}`)}
-                        className="px-4 py-2 rounded-lg border border-white/10 hover:border-brand-red hover:bg-brand-red text-white text-xs font-display font-semibold uppercase tracking-wider transition-all self-start sm:self-center cursor-pointer shadow-md"
+                        className="w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-lg border border-white/10 hover:border-brand-red hover:bg-brand-red text-white text-xs font-display font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-md text-center justify-center inline-flex"
                         id={`book-class-btn-${activeDayIndex}-${index}`}
                       >
                         Réserver

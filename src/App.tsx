@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -19,15 +19,64 @@ import Trainers from './components/Trainers';
 import HomeAbout from './components/HomeAbout';
 import Accompagnement from './components/Accompagnement';
 import Footer from './components/Footer';
+import PwaInstallBottomSheet from './components/PwaInstallBottomSheet';
 import { MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'home' | 'contact' | 'gallery' | 'services' | 'about'>('home');
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isPwaOpen, setIsPwaOpen] = useState(false);
+  const [isPwaInstalled, setIsPwaInstalled] = useState(false);
+
+  const scrollPositionsRef = useRef<Record<string, number>>({});
+  const previousViewRef = useRef<'home' | 'contact' | 'gallery' | 'services' | 'about'>('home');
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Save scroll position of the old view before applying scroll changes for the new view.
+    const oldView = previousViewRef.current;
+    scrollPositionsRef.current[oldView] = window.scrollY;
+
+    // Restore scroll position for the new view (or 0 if none/no history)
+    const savedY = scrollPositionsRef.current[currentView] ?? 0;
+    
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: savedY, behavior: 'instant' });
+    }, 50);
+
+    previousViewRef.current = currentView;
+
+    return () => clearTimeout(timer);
   }, [currentView]);
+
+  // Monitor PWA installation prompt and status
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      console.log('beforeinstallprompt event fired and captured.');
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    const handleAppInstalled = () => {
+      setIsPwaInstalled(true);
+      setDeferredPrompt(null);
+      console.log('AFRIKA FIT PWA App successfully installed.');
+    };
+
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    // Check if app is running as standalone
+    if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone) {
+      setIsPwaInstalled(true);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
 
   // Utility scrolling actions to pass down to navbar & hero components
   const handleScrollToJoin = () => {
@@ -69,6 +118,7 @@ export default function App() {
         onJoinClick={handleScrollToJoin} 
         currentView={currentView}
         onViewChange={(view) => setCurrentView(view)}
+        onPwaClick={() => setIsPwaOpen(true)}
       />
 
       <AnimatePresence mode="wait">
@@ -187,6 +237,14 @@ export default function App() {
           <MessageCircle className="w-7 h-7 fill-white/10" />
         </motion.button>
       </div>
+
+      {/* PWA Install Confirmation Bottom Sheet */}
+      <PwaInstallBottomSheet
+        isOpen={isPwaOpen}
+        onClose={() => setIsPwaOpen(false)}
+        deferredPrompt={deferredPrompt}
+        onInstallSuccess={() => setIsPwaInstalled(true)}
+      />
     </div>
   );
 }

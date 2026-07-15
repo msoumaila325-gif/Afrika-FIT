@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Flame, ArrowRight, Sun, Moon } from 'lucide-react';
+import { Menu, X, Flame, ArrowRight, Sun, Moon, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import Logo from './Logo';
 
@@ -12,9 +12,10 @@ interface NavbarProps {
   onJoinClick: () => void;
   currentView?: 'home' | 'contact' | 'gallery' | 'services' | 'about';
   onViewChange?: (view: 'home' | 'contact' | 'gallery' | 'services' | 'about') => void;
+  onPwaClick?: () => void;
 }
 
-export default function Navbar({ onJoinClick, currentView = 'home', onViewChange }: NavbarProps) {
+export default function Navbar({ onJoinClick, currentView = 'home', onViewChange, onPwaClick }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -224,6 +225,17 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
 
           {/* Mobile menu and theme buttons */}
           <div className="flex items-center gap-2 lg:hidden">
+            {onPwaClick && (
+              <button
+                onClick={onPwaClick}
+                className="p-2 rounded-lg bg-white/5 text-brand-orange hover:text-white hover:bg-brand-orange/10 transition-colors cursor-pointer border border-white/5 flex items-center justify-center animate-pulse"
+                aria-label="Installer l'application mobile"
+                title="Installer l'application mobile"
+                id="pwa-install-mobile-icon"
+              >
+                <Download className="w-4 h-4 text-brand-orange" />
+              </button>
+            )}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-white transition-colors cursor-pointer border border-white/5"
