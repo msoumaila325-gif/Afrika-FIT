@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Flame, ArrowRight, Sun, Moon, Download } from 'lucide-react';
+import { Menu, X, Flame, ArrowRight, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import Logo from './Logo';
 
@@ -19,12 +19,6 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('apex-theme') as 'dark' | 'light') || 'dark';
-    }
-    return 'dark';
-  });
 
   const navLinks = [
     { name: 'Accueil', href: '#hero', id: 'hero' },
@@ -91,17 +85,9 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
 
   useEffect(() => {
     const root = window.document.documentElement;
-    if (theme === 'light') {
-      root.classList.add('light');
-    } else {
-      root.classList.remove('light');
-    }
-    localStorage.setItem('apex-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+    root.classList.remove('light');
+    localStorage.removeItem('apex-theme');
+  }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -191,24 +177,8 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
               ))}
             </div>
           </div>
-
           {/* Desktop Actions (Right) */}
           <div className="hidden lg:flex items-center justify-end flex-1 gap-6">
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors cursor-pointer flex items-center justify-center border border-white/5"
-              aria-label="Changer de thème"
-              title="Changer de thème"
-              id="theme-toggle-desktop"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-brand-orange animate-pulse" />
-              ) : (
-                <Moon className="w-4 h-4 text-brand-red" />
-              )}
-            </button>
-
             {/* CTA Join Now Button */}
             <button
               onClick={onJoinClick}
@@ -236,18 +206,6 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
                 <Download className="w-4 h-4 text-brand-orange" />
               </button>
             )}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-white transition-colors cursor-pointer border border-white/5"
-              aria-label="Changer de thème"
-              id="theme-toggle-mobile"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-brand-orange" />
-              ) : (
-                <Moon className="w-4 h-4 text-brand-red" />
-              )}
-            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-400 hover:text-white p-2 rounded-lg transition-colors"
