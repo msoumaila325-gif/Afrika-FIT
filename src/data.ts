@@ -4,13 +4,26 @@
  */
 
 import { GymStat, ServiceItem, GalleryItem, PricingPlan, TrainerItem, TestimonialItem, FAQItem, TimetableDay, Product } from './types';
+import wheyImg from './assets/images/whey.jpg';
+import wheyImg2 from './assets/images/whey_gold_standard_2_1784297766975.jpg';
+import creatineImg from './assets/images/creatine.jpeg';
+import creatineImg2 from './assets/images/creatine_powder_2_1784297793576.jpg';
+import beltImg from './assets/images/belt.jpg';
+import beltImg2 from './assets/images/weightlifting_belt_2_1784297803141.jpg';
+import glovesImg from './assets/images/gloves.jpg';
+import glovesImg2 from './assets/images/tactical_gloves_2_1784297817076.jpg';
+import kneesleevesImg from './assets/images/kneesleeves.jpg';
+import kneesleevesImg2 from './assets/images/knee_sleeves_2_1784297830197.jpg';
+import jumpropeImg from './assets/images/jumprope.jpg';
+import jumpropeImg2 from './assets/images/jump_rope_2_1784297842796.jpg';
+
 export const productsData: Product[] = [
   // Nutrition & Suppléments
   { 
     id: 'prod-1', 
     name: 'Optimum Nutrition 100% Whey Gold Standard', 
     category: 'nutrition', 
-    images: ['/images/whey.jpg', '/images/whey_gold_standard_2_1784297766975.jpg'], 
+    images: [wheyImg, wheyImg2], 
     badge: 'Best-Seller',
     specs: ['24g de protéines par portion', '5.5g de BCAA', 'Cookies & Cream'],
     description: "La Whey Gold Standard d'Optimum Nutrition est l'une des protéines les plus vendues au monde. Formulée pour favoriser le développement musculaire et la récupération post-entraînement. Elle se mélange facilement et offre un goût délicieux.",
@@ -20,7 +33,7 @@ export const productsData: Product[] = [
     id: 'prod-2', 
     name: 'Optimum Nutrition Creatine Powder', 
     category: 'nutrition', 
-    images: ['/images/creatine.jpeg', '/images/creatine_powder_2_1784297793576.jpg'],
+    images: [creatineImg, creatineImg2],
     specs: ['5g de monohydrate de créatine pure', 'Zéro calorie', 'Non aromatisé'],
     description: "Le monohydrate de créatine est un supplément incontournable pour augmenter la force, la puissance et l'endurance. Cette poudre non aromatisée peut être mélangée à n'importe quelle boisson pour booster vos performances.",
     features: ['Améliore la force explosive', 'Soutient la croissance musculaire', 'Poudre micronisée pour une meilleure absorption']
@@ -31,7 +44,7 @@ export const productsData: Product[] = [
     id: 'prod-3', 
     name: 'Ceinture de Force Fitgriff', 
     category: 'powerlifting', 
-    images: ['/images/belt.jpg', '/images/weightlifting_belt_2_1784297803141.jpg'], 
+    images: [beltImg, beltImg2], 
     badge: 'Best-Seller',
     specs: ['Cuir véritable double épaisseur', 'Boucle en acier robuste', 'Maintien lombaire optimal'],
     description: "Cette ceinture de levage en cuir est conçue pour les charges lourdes. Elle fournit un soutien abdominal et lombaire indispensable pour le squat, le soulevé de terre et autres mouvements de force.",
@@ -41,7 +54,7 @@ export const productsData: Product[] = [
     id: 'prod-4',
     name: 'Gants de Musculation Tactiques',
     category: 'powerlifting',
-    images: ['/images/gloves.jpg', '/images/tactical_gloves_2_1784297817076.jpg'],
+    images: [glovesImg, glovesImg2],
     badge: 'Nouveau',
     specs: ['Protection des paumes anti-callosités', 'Serrage velcro sécurisé', 'Design respirant'],
     description: "Gants respirants conçus pour une prise en main maximale et une protection contre les callosités et les ampoules. Idéal pour la musculation quotidienne et l'entraînement croisé.",
@@ -51,7 +64,7 @@ export const productsData: Product[] = [
     id: 'prod-5',
     name: 'Genouillère de Compression',
     category: 'powerlifting',
-    images: ['/images/kneesleeves.jpg', '/images/knee_sleeves_2_1784297830197.jpg'],
+    images: [kneesleevesImg, kneesleevesImg2],
     specs: ['Tricot 3D respirant', 'Stabilisation articulaire', 'Idéal pour le squat et l\'haltérophilie'],
     description: "Manchons de compression pour genoux offrant chaleur et stabilité. Parfait pour les squats lourds et les entraînements intenses, ils préviennent les blessures et soulagent les douleurs.",
     features: ['Maintient les articulations au chaud', 'Fournit une légère compression', 'Design ergonomique pour le confort']
@@ -62,7 +75,7 @@ export const productsData: Product[] = [
     id: 'prod-6',
     name: 'Corde à Sauter avec Poignées Mousse',
     category: 'crossfit',
-    images: ['/images/jumprope.jpg', '/images/jump_rope_2_1784297842796.jpg'],
+    images: [jumpropeImg, jumpropeImg2],
     badge: 'Best-Seller',
     specs: ['Poignées ergonomiques antidérapantes', 'Câble ultra-rapide', 'Conditionnement métabolique'],
     description: "Corde à sauter de vitesse idéale pour les doubles under, le conditionnement métabolique et le cardio. Équipée de roulements à billes pour une rotation fluide.",
