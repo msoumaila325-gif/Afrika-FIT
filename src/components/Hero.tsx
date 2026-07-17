@@ -6,7 +6,6 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck, Flame, Trophy, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
-import heroImage from '../assets/images/hero_black_man_gym_1784292711195.jpg';
 
 interface HeroProps {
   onJoinClick: () => void;
@@ -22,7 +21,7 @@ export default function Hero({ onJoinClick, onExploreClick }: HeroProps) {
       {/* Immersive Dark Gym Background with Parallax Overlay */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none">
         <img
-          src={heroImage}
+          src="/images/hero_black_man_gym_1784292711195.jpg"
           alt="Athlète musculation"
           className="absolute right-0 top-0 h-full w-full lg:w-[60%] object-cover object-center sm:object-right opacity-75 lg:opacity-95 scale-105 transition-all duration-700"
           referrerPolicy="no-referrer"
