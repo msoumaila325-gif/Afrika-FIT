@@ -5,8 +5,6 @@ import { productsData } from '../data';
 import { Product } from '../types';
 import ProductDetails from './ProductDetails';
 
-import heroImage from '@/assets/images/hero_black_man_gym_1784292711195.jpg';
-
 interface ShopProps {
   isStandalone?: boolean;
   onBackToHome?: () => void;
