@@ -75,7 +75,7 @@ export default function ProductDetails({ product, onBack, onSelectProduct }: Pro
           
           {/* Image Gallery */}
           <div className="relative flex flex-col gap-4">
-            <div className="relative aspect-square bg-white rounded-3xl overflow-hidden border border-white/10 flex items-center justify-center group">
+            <div className="relative aspect-square bg-white rounded-3xl overflow-hidden border border-white/10 group">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={currentImageIndex}
@@ -85,7 +85,7 @@ export default function ProductDetails({ product, onBack, onSelectProduct }: Pro
                   transition={{ duration: 0.3 }}
                   src={product.images[currentImageIndex]}
                   alt={product.name}
-                  className="w-full h-full object-contain p-4"
+                  className="absolute inset-0 w-full h-full object-contain p-4 sm:p-8"
                 />
               </AnimatePresence>
 
@@ -134,7 +134,7 @@ export default function ProductDetails({ product, onBack, onSelectProduct }: Pro
                     <img 
                       src={img} 
                       alt={`${product.name} miniature ${idx + 1}`} 
-                      className="w-full h-full object-contain p-2"
+                      className="absolute inset-0 w-full h-full object-contain p-2"
                     />
                   </button>
                 ))}
@@ -243,11 +243,11 @@ export default function ProductDetails({ product, onBack, onSelectProduct }: Pro
                   }}
                   className="group cursor-pointer flex flex-col bg-brand-card rounded-2xl border border-white/10 overflow-hidden hover:border-brand-orange/30 transition-all duration-300"
                 >
-                  <div className="relative h-48 bg-white overflow-hidden flex items-center justify-center p-4">
+                  <div className="relative h-48 sm:h-56 bg-white overflow-hidden">
                     <img
                       src={rec.images[0]}
                       alt={rec.name}
-                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700"
+                      className="absolute inset-0 w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-700"
                     />
                     {rec.badge && (
                       <div className="absolute top-3 left-3 px-2 py-1 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-lg">

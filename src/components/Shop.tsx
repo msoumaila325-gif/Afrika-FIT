@@ -99,11 +99,11 @@ export default function Shop({ isStandalone, onBackToHome }: ShopProps) {
                 className="group cursor-pointer flex flex-col bg-brand-card rounded-2xl border border-white/10 overflow-hidden hover:border-brand-orange/30 transition-all duration-300 shadow-xl"
               >
                 {/* Product Image */}
-                <div className="relative h-64 bg-white overflow-hidden flex items-center justify-center">
+                <div className="relative h-64 sm:h-72 bg-white overflow-hidden">
                   <img
                     src={product.images[0]}
                     alt={product.name}
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 p-4"
+                    className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 p-4"
                   />
                   {product.badge && (
                     <div className="absolute top-4 left-4 px-3 py-1 bg-brand-dark/80 backdrop-blur-md border border-white/10 rounded-lg">
