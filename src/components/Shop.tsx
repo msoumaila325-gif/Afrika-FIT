@@ -5,6 +5,8 @@ import { productsData } from '../data';
 import { Product } from '../types';
 import ProductDetails from './ProductDetails';
 
+import heroImage from '@/assets/images/hero_black_man_gym_1784292711195.jpg';
+
 interface ShopProps {
   isStandalone?: boolean;
   onBackToHome?: () => void;
@@ -101,7 +103,8 @@ export default function Shop({ isStandalone, onBackToHome }: ShopProps) {
                 {/* Product Image */}
                 <div className="relative h-64 sm:h-72 bg-white overflow-hidden">
                   <img
-                    src={product.images[0]}
+                   src={product.images[0]} 
+                  //  src={heroImage}
                     alt={product.name}
                     className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 p-4"
                   />
