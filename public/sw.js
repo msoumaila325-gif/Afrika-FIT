@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-const CACHE_NAME = 'afrika-fit-v1';
+const CACHE_NAME = 'afrika-fit-v3';
+
 const ASSETS = [
   '/',
   '/index.html',
@@ -25,11 +26,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
+        keys.map((key) => caches.delete(key))
       );
     })
   );
@@ -37,21 +34,24 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Simple fetch handler to meet PWA installation requirement
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() => {
-        return caches.match('/') || new Response('Offline', {
-          headers: { 'Content-Type': 'text/html' }
+  // Always try the network first, fall back to cache if offline
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        // Optionally cache the new response here
+        return response;
+      })
+      .catch(() => {
+        return caches.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          // If it's a navigation request and we're offline, return the root
+          if (event.request.mode === 'navigate') {
+            return caches.match('/');
+          }
+          return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
         });
       })
-    );
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
-    })
   );
 });

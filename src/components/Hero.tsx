@@ -6,7 +6,7 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck, Flame, Trophy, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
-import heroImage from '../assets/images/hero_black_man_gym_1784292711195.jpg';
+import heroImage from '@/assets/images/hero_black_man_gym_1784292711195.jpg';
 
 interface HeroProps {
   onJoinClick: () => void;

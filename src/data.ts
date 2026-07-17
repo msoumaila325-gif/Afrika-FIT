@@ -4,18 +4,18 @@
  */
 
 import { GymStat, ServiceItem, GalleryItem, PricingPlan, TrainerItem, TestimonialItem, FAQItem, TimetableDay, Product } from './types';
-import wheyImg from './assets/images/whey.jpg';
-import wheyImg2 from './assets/images/whey_gold_standard_2_1784297766975.jpg';
-import creatineImg from './assets/images/creatine.jpeg';
-import creatineImg2 from './assets/images/creatine_powder_2_1784297793576.jpg';
-import beltImg from './assets/images/belt.jpg';
-import beltImg2 from './assets/images/weightlifting_belt_2_1784297803141.jpg';
-import glovesImg from './assets/images/gloves.jpg';
-import glovesImg2 from './assets/images/tactical_gloves_2_1784297817076.jpg';
-import kneesleevesImg from './assets/images/kneesleeves.jpg';
-import kneesleevesImg2 from './assets/images/knee_sleeves_2_1784297830197.jpg';
-import jumpropeImg from './assets/images/jumprope.jpg';
-import jumpropeImg2 from './assets/images/jump_rope_2_1784297842796.jpg';
+import wheyImg from '@/assets/images/whey.jpg';
+import wheyImg2 from '@/assets/images/whey_gold_standard_2_1784297766975.jpg';
+import creatineImg from '@/assets/images/creatine.jpeg';
+import creatineImg2 from '@/assets/images/creatine_powder_2_1784297793576.jpg';
+import beltImg from '@/assets/images/belt.jpg';
+import beltImg2 from '@/assets/images/weightlifting_belt_2_1784297803141.jpg';
+import glovesImg from '@/assets/images/gloves.jpg';
+import glovesImg2 from '@/assets/images/tactical_gloves_2_1784297817076.jpg';
+import kneesleevesImg from '@/assets/images/kneesleeves.jpg';
+import kneesleevesImg2 from '@/assets/images/knee_sleeves_2_1784297830197.jpg';
+import jumpropeImg from '@/assets/images/jumprope.jpg';
+import jumpropeImg2 from '@/assets/images/jump_rope_2_1784297842796.jpg';
 
 export const productsData: Product[] = [
   // Nutrition & Suppléments
