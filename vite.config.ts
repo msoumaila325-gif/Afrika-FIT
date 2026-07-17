@@ -7,7 +7,7 @@ import { defineConfig } from 'vite';
 export default defineConfig(() => {
   return {
     // 1. Change './' par '/' (ou supprime la ligne)
-    base: '/', 
+    base: './', 
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
