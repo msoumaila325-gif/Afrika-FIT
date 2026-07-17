@@ -71,3 +71,14 @@ export interface TimetableDay {
   classes: string[];
   note?: string;
 }
+
+export interface Product {
+  id: string;
+  name: string;
+  category: 'nutrition' | 'powerlifting' | 'crossfit' | 'gear';
+  images: string[];
+  description?: string;
+  features?: string[];
+  badge?: 'Best-Seller' | 'Nouveau' | 'Rupture de stock';
+  specs?: string[];
+}

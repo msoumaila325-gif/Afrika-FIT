@@ -10,8 +10,8 @@ import Logo from './Logo';
 
 interface NavbarProps {
   onJoinClick: () => void;
-  currentView?: 'home' | 'contact' | 'gallery' | 'services' | 'about';
-  onViewChange?: (view: 'home' | 'contact' | 'gallery' | 'services' | 'about') => void;
+  currentView?: 'home' | 'contact' | 'gallery' | 'services' | 'about' | 'shop';
+  onViewChange?: (view: 'home' | 'contact' | 'gallery' | 'services' | 'about' | 'shop') => void;
   onPwaClick?: () => void;
 }
 
@@ -19,16 +19,23 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const navLinks = [
     { name: 'Accueil', href: '#hero', id: 'hero' },
     { name: 'À Propos', href: '#about', id: 'about' },
     { name: 'Services', href: '#services', id: 'services' },
+    { name: 'Boutique', href: '#shop', id: 'shop' },
     { name: 'Galerie', href: '#gallery', id: 'gallery' },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
   useEffect(() => {
+    if (currentView === 'shop') {
+      setActiveSection('shop');
+      setScrolled(true);
+      return;
+    }
     if (currentView === 'contact') {
       setActiveSection('contact');
       setScrolled(true);
@@ -95,7 +102,9 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
     
     const targetId = href.replace('#', '');
     
-    if (targetId === 'contact') {
+    if (targetId === 'shop') {
+      if (onViewChange) onViewChange('shop');
+    } else if (targetId === 'contact') {
       if (onViewChange) onViewChange('contact');
     } else if (targetId === 'gallery') {
       if (onViewChange) onViewChange('gallery');

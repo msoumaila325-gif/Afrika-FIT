@@ -93,7 +93,7 @@ export default function Services({ isStandalone = false, onBackToHome }: Service
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: idx * 0.05 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -5, scale: 1.03 }}
                 className="group relative h-[380px] rounded-2xl overflow-hidden border border-white/5 bg-brand-card hover:border-brand-red/30 transition-all duration-300 flex flex-col justify-end cursor-pointer shadow-xl"
                 onClick={() => setSelectedService(service)}
                 id={`service-card-${service.id}`}

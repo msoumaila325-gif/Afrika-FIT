@@ -20,17 +20,18 @@ import HomeAbout from './components/HomeAbout';
 import Accompagnement from './components/Accompagnement';
 import Footer from './components/Footer';
 import PwaInstallBottomSheet from './components/PwaInstallBottomSheet';
+import Shop from './components/Shop';
 import { MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'contact' | 'gallery' | 'services' | 'about'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'contact' | 'gallery' | 'services' | 'about' | 'shop'>('home');
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isPwaOpen, setIsPwaOpen] = useState(false);
   const [isPwaInstalled, setIsPwaInstalled] = useState(false);
 
   const scrollPositionsRef = useRef<Record<string, number>>({});
-  const previousViewRef = useRef<'home' | 'contact' | 'gallery' | 'services' | 'about'>('home');
+  const previousViewRef = useRef<'home' | 'contact' | 'gallery' | 'services' | 'about' | 'shop'>('home');
 
   useEffect(() => {
     // Save scroll position of the old view before applying scroll changes for the new view.
@@ -226,6 +227,20 @@ export default function App() {
           >
             {/* Standalone Contact and FAQ Page */}
             <Contact isStandalone={true} onBackToHome={() => setCurrentView('home')} />
+          </motion.div>
+        )}
+
+        {currentView === 'shop' && (
+          <motion.div
+            key="shop-page"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="pt-20"
+          >
+            {/* Standalone Shop Page */}
+            <Shop isStandalone={true} onBackToHome={() => setCurrentView('home')} />
           </motion.div>
         )}
       </AnimatePresence>
