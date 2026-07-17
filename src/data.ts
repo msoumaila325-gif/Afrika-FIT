@@ -6,10 +6,10 @@
 import { GymStat, ServiceItem, GalleryItem, PricingPlan, TrainerItem, TestimonialItem, FAQItem, TimetableDay } from './types';
 
 export const statsData: GymStat[] = [
-  { id: 'stat-1', value: '15 000+', label: 'Membres Actifs' },
-  { id: 'stat-2', value: '45+', label: 'Coachs d\'Élite' },
-  { id: 'stat-3', value: '180+', label: 'Postes d\'Entraînement' },
-  { id: 'stat-4', value: '15+', label: 'Années d\'Excellence' },
+  { id: 'stat-1', value: '2 500+', label: 'Membres Actifs' },
+  { id: 'stat-2', value: '12+', label: 'Coachs d\'Élite' },
+  { id: 'stat-3', value: '80+', label: 'Postes d\'Entraînement' },
+  { id: 'stat-4', value: '5+', label: 'Années d\'Excellence' },
 ];
 
 export const servicesData: ServiceItem[] = [
@@ -133,21 +133,21 @@ export const galleryData: GalleryItem[] = [
 export const timetableData: TimetableDay[] = [
   {
     day: 'Lundi - Vendredi',
-    hours: '05h00 - 23h00',
-    classes: ['06h00 - Hatha Yoga au réveil', '09h00 - WOD CrossFit', '12h00 - Power Cardio de midi', '17h30 - Musculation Avancée', '19h00 - Rythmes Zumba'],
+    hours: '16h00 - 23h00',
+    classes: ['17h00 - Musculation & Force', '18h30 - WOD CrossFit', '19h30 - Entraînement Cardio', '20h30 - Yoga Zen & Pilates'],
     note: 'Hammam de luxe et douches accessibles toute la journée.',
   },
   {
     day: 'Samedi',
-    hours: '06h00 - 21h00',
-    classes: ['08h00 - Conditionnement HIIT', '10h30 - CrossFit en équipe', '14h00 - Yoga Vinyasa', '16h30 - Clinique de Force Athlétique'],
-    note: 'Bar à nutrition et comptoir de shakes protéinés ouverts de 07h00 à 20h00.',
+    hours: '16h00 - 22h00',
+    classes: ['17h00 - Conditionnement HIIT', '18h30 - CrossFit en équipe', '20h00 - Yoga Vinyasa'],
+    note: 'Bar à nutrition et comptoir de shakes protéinés ouverts.',
   },
   {
     day: 'Dimanche',
-    hours: '08h00 - 20h00',
-    classes: ['09h00 - Yoga Récupération Active', '11h00 - Sculpting Sangle Abdominale', '15h00 - Mix Cardio Endurance'],
-    note: 'Pass d\'invités réservés aux membres disponibles pour validation aujourd\'hui.',
+    hours: 'Jour de repos',
+    classes: [],
+    note: 'L\'établissement est fermé pour le nettoyage et la récupération des athlètes.',
   },
 ];
 
@@ -220,11 +220,11 @@ export const pricingPlans: PricingPlan[] = [
 export const trainersData: TrainerItem[] = [
   {
     id: 'trn-1',
-    name: 'Marcus Vance',
-    specialty: 'Force Athlétique & Force Absolue',
+    name: 'Amadou Diarra',
+    specialty: 'Force Athlétique & Haltérophilie',
     experience: '12 Ans',
     imageUrl: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&q=80&w=600',
-    certifications: ['Entraîneur de niveau élite USAPL', 'Spécialiste de l\'amélioration des performances NASM', 'Licence en kinésiologie'],
+    certifications: ['Coach d\'Élite USAPL', 'Spécialiste de la Performance', 'Diplôme d\'État'],
     socials: {
       instagram: 'https://instagram.com',
       twitter: 'https://twitter.com',
@@ -233,11 +233,11 @@ export const trainersData: TrainerItem[] = [
   },
   {
     id: 'trn-2',
-    name: 'Elena Rostova',
-    specialty: 'Directrice de Box CrossFit & HIIT',
+    name: 'Awa Keita',
+    specialty: 'CrossFit & Conditionnement',
     experience: '8 Ans',
-    imageUrl: 'https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=600',
-    certifications: ['Entraîneur CrossFit Niveau 3', 'Coach d\'haltérophilie sportive USA Weightlifting', 'Nutrition de précision Niveau 1'],
+    imageUrl: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&q=80&w=600',
+    certifications: ['Entraîneur CrossFit Niveau 3', 'Nutrition Sportive', 'Préparation Physique'],
     socials: {
       instagram: 'https://instagram.com',
       linkedin: 'https://linkedin.com'
@@ -245,11 +245,11 @@ export const trainersData: TrainerItem[] = [
   },
   {
     id: 'trn-3',
-    name: 'Darnell Jackson',
-    specialty: 'Conditionnement & Vitesse Athlétique',
+    name: 'Ousmane Traoré',
+    specialty: 'Boxe & Cardio Haute Intensité',
     experience: '10 Ans',
     imageUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600',
-    certifications: ['Spécialiste certifié de la force et du conditionnement NSCA', 'Certifié FMS Niveau 2', 'Spécialiste de la forme pour les jeunes'],
+    certifications: ['Maître d\'Armes', 'Certifié FMS Niveau 2', 'Spécialiste Arts Martiaux'],
     socials: {
       instagram: 'https://instagram.com',
       twitter: 'https://twitter.com'
@@ -257,11 +257,11 @@ export const trainersData: TrainerItem[] = [
   },
   {
     id: 'trn-4',
-    name: 'Sophia Chen',
-    specialty: 'Yoga, Pilates & Santé Corps-Esprit',
+    name: 'Fatoumata Coulibaly',
+    specialty: 'Yoga, Pilates & Souplesse',
     experience: '7 Ans',
-    imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600',
-    certifications: ['Professeure de yoga certifiée RYT 500', 'Instructrice de Pilates certifiée STOTT', 'Praticienne de la pleine conscience'],
+    imageUrl: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=600',
+    certifications: ['Professeure de yoga certifiée', 'Instructrice de Pilates', 'Praticienne de la pleine conscience'],
     socials: {
       instagram: 'https://instagram.com',
       linkedin: 'https://linkedin.com'

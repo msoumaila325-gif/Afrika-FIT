@@ -49,6 +49,23 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [currentView]);
 
+  // Deep Midnight Theme Variant Logic
+  useEffect(() => {
+    const checkTimeForMidnightTheme = () => {
+      const hour = new Date().getHours();
+      // Apply Deep Midnight theme if after 20:00 or before 6:00
+      if (hour >= 20 || hour < 6) {
+        document.documentElement.classList.add('deep-midnight');
+      } else {
+        document.documentElement.classList.remove('deep-midnight');
+      }
+    };
+
+    checkTimeForMidnightTheme();
+    const intervalId = setInterval(checkTimeForMidnightTheme, 60000); // Check every minute
+    return () => clearInterval(intervalId);
+  }, []);
+
   // Monitor PWA installation prompt and status
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {

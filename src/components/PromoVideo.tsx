@@ -33,7 +33,7 @@ export default function PromoVideo() {
               <h2 className="font-display text-3xl sm:text-5xl font-bold tracking-tight text-white uppercase leading-tight">
                 L'EXPÉRIENCE <br className="hidden lg:inline" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-brand-orange to-red-500">
-                  APEX CLUB
+                  AFRIKA FIT
                 </span>
               </h2>
               <div className="h-1 w-20 bg-gradient-to-r from-brand-red to-brand-orange mx-auto lg:mx-0 rounded-full"></div>
@@ -119,7 +119,7 @@ export default function PromoVideo() {
               <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl glass-card border border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Flame className="w-4 h-4 text-brand-red animate-bounce" />
-                  <span className="font-mono text-xs uppercase text-gray-300 tracking-wider">Visite Guidée APEX Club</span>
+                  <span className="font-mono text-xs uppercase text-gray-300 tracking-wider">Visite Guidée Afrika Fit</span>
                 </div>
                 <span className="text-xs font-mono text-brand-orange font-bold uppercase tracking-widest">4K</span>
               </div>
@@ -152,7 +152,7 @@ export default function PromoVideo() {
               >
                 <iframe
                   src={videoUrl}
-                  title="APEX Promotional Cinematic"
+                  title="Afrika Fit Promotional Cinematic"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   className="w-full h-full object-cover"

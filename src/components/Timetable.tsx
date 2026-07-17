@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
-import { Calendar, Clock, Sparkles, CheckCircle2, ChevronRight, User } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Calendar, Clock, Moon, Sparkles, CheckCircle2, ChevronRight, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { timetableData } from '../data';
 
@@ -16,6 +16,17 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
   const [activeDayIndex, setActiveDayIndex] = useState(0);
   const [selectedClass, setSelectedClass] = useState<string | null>(null);
   const [bookingSuccess, setBookingSuccess] = useState<string | null>(null);
+  const [isMidnightTheme, setIsMidnightTheme] = useState(false);
+
+  useEffect(() => {
+    const checkTime = () => {
+      const hour = new Date().getHours();
+      setIsMidnightTheme(hour >= 20 || hour < 6);
+    };
+    checkTime();
+    const interval = setInterval(checkTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   const activeDay = timetableData[activeDayIndex];
 
@@ -104,13 +115,21 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
             className="hidden lg:flex lg:col-span-5 flex-col space-y-6"
           >
             <h3 className="font-display font-bold text-lg text-white uppercase tracking-wider mb-2 flex items-center gap-2">
-              <Clock className="w-5 h-5 text-brand-red animate-pulse" />
+              {isMidnightTheme ? (
+                <Moon className="w-5 h-5 text-brand-orange animate-pulse" />
+              ) : (
+                <Clock className="w-5 h-5 text-brand-red animate-pulse" />
+              )}
               Heures d'Ouverture
             </h3>
 
             <div className="flex flex-col gap-6">
               {timetableData.map((dayData, idx) => (
                 <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
                   whileHover={{ y: -2, borderColor: 'rgba(239, 68, 68, 0.25)' }}
                   whileTap={{ scale: 0.98 }}
                   key={idx}
@@ -178,49 +197,74 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
 
               {/* Classes list */}
               <div className="space-y-4">
-                {activeDay.classes.map((className, index) => {
-                  const [timePart, namePart] = className.split(' - ');
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.04 }}
-                      className="p-4 rounded-xl bg-brand-dark/50 border border-white/5 hover:border-brand-orange/20 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="py-2.5 px-3.5 rounded-lg bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-center shrink-0 flex items-center gap-2 sm:gap-0 sm:flex-col sm:justify-center sm:min-w-[80px]">
-                          <Clock className="w-3.5 h-3.5 text-brand-orange sm:hidden" />
-                          <span className="font-mono text-xs sm:text-sm font-bold leading-none">
-                            {timePart}
-                          </span>
-                        </div>
-                        <div>
-                          <h5 className="font-display font-bold text-white text-sm sm:text-base group-hover:text-brand-orange transition-colors">
-                            {namePart}
-                          </h5>
-                          <p className="text-[11px] sm:text-xs text-gray-400 font-light mt-0.5">
-                            Niveau : Intermédiaire à Élite • Service de serviettes inclus
-                          </p>
-                        </div>
-                      </div>
-
-                      <button
-                        onClick={() => handleBookClass(`${timePart} - ${namePart}`)}
-                        className="w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-lg border border-white/10 hover:border-brand-red hover:bg-brand-red text-white text-xs font-display font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-md text-center justify-center inline-flex"
-                        id={`book-class-btn-${activeDayIndex}-${index}`}
+                {activeDay.classes.length > 0 ? (
+                  activeDay.classes.map((className, index) => {
+                    const [timePart, namePart] = className.split(' - ');
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ delay: index * 0.08, duration: 0.4, type: "spring" }}
+                        className="p-4 rounded-xl bg-brand-dark/50 border border-white/5 hover:border-brand-orange/20 hover:bg-white/[0.02] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 group shadow-sm hover:shadow-md"
                       >
-                        Réserver
-                      </button>
-                    </motion.div>
-                  );
-                })}
+                        <div className="flex items-center gap-4">
+                          <div className="py-2.5 px-3.5 rounded-lg bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-center shrink-0 flex items-center gap-2 sm:gap-0 sm:flex-col sm:justify-center sm:min-w-[80px] group-hover:bg-brand-orange/20 transition-colors">
+                            {isMidnightTheme ? (
+                              <Moon className="w-3.5 h-3.5 text-brand-orange sm:hidden" />
+                            ) : (
+                              <Clock className="w-3.5 h-3.5 text-brand-orange sm:hidden" />
+                            )}
+                            <span className="font-mono text-xs sm:text-sm font-bold leading-none">
+                              {timePart}
+                            </span>
+                          </div>
+                          <div>
+                            <h5 className="font-display font-bold text-white text-sm sm:text-base group-hover:text-brand-orange transition-colors">
+                              {namePart}
+                            </h5>
+                            <p className="text-[11px] sm:text-xs text-gray-400 font-light mt-0.5">
+                              Niveau : Intermédiaire à Élite • Service de serviettes inclus
+                            </p>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => handleBookClass(`${timePart} - ${namePart}`)}
+                          className="w-full sm:w-auto px-4 py-2.5 sm:py-2 rounded-lg border border-white/10 hover:border-brand-red hover:bg-brand-red text-white text-xs font-display font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-md text-center justify-center inline-flex"
+                          id={`book-class-btn-${activeDayIndex}-${index}`}
+                        >
+                          Réserver
+                        </button>
+                      </motion.div>
+                    );
+                  })
+                ) : (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, type: "spring" }}
+                    className="p-8 rounded-2xl bg-brand-dark/30 border border-white/5 flex flex-col items-center justify-center text-center space-y-4"
+                  >
+                    <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center">
+                      <CheckCircle2 className="w-8 h-8 text-gray-500" />
+                    </div>
+                    <div>
+                      <h5 className="font-display font-bold text-white text-lg">Jour de Repos</h5>
+                      <p className="text-sm text-gray-400 font-light mt-1">
+                        Aucun cours n'est planifié pour ce jour. Prenez du temps pour récupérer.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
               </div>
 
               {/* Fine Print Note */}
-              <p className="text-[10px] text-gray-500 font-mono text-center mt-6 tracking-wide">
-                * Veuillez vous présenter 10 minutes avant le début de la séance. Aucun retard ne sera toléré pour ne pas perturber l'entraînement.
-              </p>
+              {activeDay.classes.length > 0 && (
+                <p className="text-[10px] text-gray-500 font-mono text-center mt-6 tracking-wide">
+                  * Veuillez vous présenter 10 minutes avant le début de la séance. Aucun retard ne sera toléré pour ne pas perturber l'entraînement.
+                </p>
+              )}
 
             </div>
           </motion.div>

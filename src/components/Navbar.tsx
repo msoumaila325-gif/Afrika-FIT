@@ -86,7 +86,7 @@ export default function Navbar({ onJoinClick, currentView = 'home', onViewChange
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove('light');
-    localStorage.removeItem('apex-theme');
+    localStorage.removeItem('afrika-fit-theme');
   }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

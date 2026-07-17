@@ -121,7 +121,7 @@ export default function About({ isStandalone = false, onBackToHome }: AboutProps
 
             {/* Absolute floating box on mobile-hidden */}
             <div className="hidden sm:block absolute -bottom-8 -right-8 p-6 rounded-2xl glass-card border border-white/10 shadow-2xl max-w-[280px]">
-              <span className="block font-mono text-3xl font-bold text-brand-red mb-1 font-mono">15+ Ans</span>
+              <span className="block font-mono text-3xl font-bold text-brand-red mb-1 font-mono">5+ Ans</span>
               <span className="block font-display font-semibold text-white text-sm mb-2">Expérience Inégalée</span>
               <p className="text-xs text-gray-400 font-light leading-relaxed">
                 Nous guidons vos transformations physiques grâce à des évaluations athlétiques précises et un suivi régulier des performances.
@@ -210,7 +210,7 @@ export default function About({ isStandalone = false, onBackToHome }: AboutProps
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="space-y-1.5 group cursor-default"
               >
-                <div className="font-display text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-orange group-hover:scale-105 transition-transform duration-300">
+                <div className="font-display text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-orange inline-block group-hover:scale-105 transition-transform duration-300 pb-2">
                   {stat.value}
                 </div>
                 <div className="font-mono text-[10px] sm:text-xs text-gray-500 uppercase tracking-widest font-semibold">

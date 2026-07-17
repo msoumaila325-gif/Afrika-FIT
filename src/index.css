@@ -69,3 +69,37 @@ html {
   background: #ea3838;
   color: #ffffff;
 }
+
+/* Deep Midnight Eye-Comfort Theme */
+html.deep-midnight,
+html.deep-midnight body,
+html.deep-midnight .bg-\[\#050505\] {
+  background-color: #020202 !important;
+}
+
+html.deep-midnight .bg-brand-dark {
+  background-color: #020202 !important;
+}
+
+html.deep-midnight .bg-brand-card,
+html.deep-midnight .glass-card {
+  background-color: rgba(7, 7, 7, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+html.deep-midnight .border-white\/10,
+html.deep-midnight .border-white\/5 {
+  border-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+html.deep-midnight .text-white {
+  color: #cbd5e1 !important; /* Slightly dimmer white for reduced eye strain */
+}
+
+html.deep-midnight img {
+  filter: brightness(0.85) contrast(1.05) !important; /* Dim images slightly */
+}
+
+html.deep-midnight .bg-luxury-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(234, 56, 56, 0.04) 0%, rgba(255, 115, 0, 0.02) 50%, rgba(0, 0, 0, 0) 100%), #020202 !important;
+}
