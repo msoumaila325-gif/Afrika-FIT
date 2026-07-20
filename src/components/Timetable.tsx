@@ -313,7 +313,7 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
                       <input
                         required
                         type="text"
-                        placeholder="Ex. Jean Dupont"
+                        placeholder="Ex. Soumaila Maiga"
                         className="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red transition-all"
                       />
                     </div>
@@ -322,7 +322,7 @@ export default function Timetable({ isEmbedded = false }: TimetableProps) {
                       <input
                         required
                         type="tel"
-                        placeholder="Ex. +33 6 12 34 56 78"
+                        placeholder="Ex. +223 79 09 87 66"
                         className="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-red transition-all"
                       />
                     </div>

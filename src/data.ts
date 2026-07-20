@@ -345,7 +345,7 @@ export const trainersData: TrainerItem[] = [
 export const testimonialsData: TestimonialItem[] = [
   {
     id: 'tst-1',
-    name: 'Sarah Jenkins',
+    name: 'Fatoumata Traore ',
     role: 'Athlète de Compétition',
     rating: 5,
     comment: 'AFRIKA FIT n\'est pas seulement une salle de sport ; c\'est un temple athlétique de luxe. Le réglage des machines est parfait, les coachs sont d\'une rigueur scientifique remarquable et l\'environnement vous incite à dépasser vos limites. Rejoindre le programme Élite Trimestriel a complètement sculpté mon corps.',
@@ -353,7 +353,7 @@ export const testimonialsData: TestimonialItem[] = [
   },
   {
     id: 'tst-2',
-    name: 'Robert Vance',
+    name: 'Seydou Diarra',
     role: 'Directeur de Projet Senior',
     rating: 5,
     comment: 'Avec mes longues journées de travail, avoir accès à une salle d\'exception ouverte à 5h00 du matin dotée de systèmes de récupération impeccables (les saunas et bains de glace sont magiques) a tout changé pour moi. Les entraîneurs ont réglé mes problèmes de posture en 3 mois.',
@@ -361,7 +361,7 @@ export const testimonialsData: TestimonialItem[] = [
   },
   {
     id: 'tst-3',
-    name: 'Liam Sterling',
+    name: 'Mamadou Toure',
     role: 'Haltérophile & Coach',
     rating: 5,
     comment: 'Le standard d\'excellence absolu. Des plateformes olympiques officielles, des disques en fonte brute, des barres de spécialité sur mesure et une communauté formidable. Les entraîneurs maîtrisent la biomécanique à la perfection.',
@@ -369,8 +369,8 @@ export const testimonialsData: TestimonialItem[] = [
   },
   {
     id: 'tst-4',
-    name: 'Maya Patel',
-    role: 'Praticienne de Yoga',
+    name: 'Abdoul Maiga',
+    role: 'Praticienne de ',
     rating: 5,
     comment: 'Les cours de Yoga Zen sont tout simplement divins. Le studio bénéficie d\'une régulation thermique ultra-moderne, d\'une insonorisation totale et d\'ambiances tamisées idéales pour la pleine conscience. Elena et Sophia guident chacun avec bienveillance.',
     imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=300'

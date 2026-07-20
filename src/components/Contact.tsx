@@ -228,7 +228,7 @@ export default function Contact({ isStandalone = false, onBackToHome }: ContactP
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Ex. Jean Dupont"
+                      placeholder="Ex. Soumaila Maiga"
                       className="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all"
                     />
                   </div>
@@ -258,7 +258,7 @@ export default function Contact({ isStandalone = false, onBackToHome }: ContactP
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="Ex. +33 6 12 34 56 78"
+                      placeholder="Ex. +223 12 34 56 78"
                       className="w-full bg-brand-dark border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-red transition-all"
                     />
                   </div>
